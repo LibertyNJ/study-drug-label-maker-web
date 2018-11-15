@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Study Drug Label Creator</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+  <h1>Study Drug Label Creator</h1>
+  <form>
+    <fieldset>
+      <legend>Patient Name</legend>
+      <label for="last-name">Last: </label><input type="text" id="last-name" required>
+      <label for="first-name">First: </label><input type="text" id="first-name" required>
+      <label for="middle-initial">M.I.: </label><input type="text" id="middle-initial">
+    </fieldset>
+    <fieldset>
+      <legend>Drug Information</legend>
+      <label for="drug-name">Name: </label><input type="text" id="drug-name" required>
+      <label for="drug-strength">Strength: </label><input type="text" id="drug-strength" required>
+      <label for="drug-form">Form: </label><input type="text" id="drug-form" required>
+    </fieldset>
+    <button>Print Label</button>
+  </form>
+  <script src="scripts/script.js"></script>
+</body>
+
+</html>
