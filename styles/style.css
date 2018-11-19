@@ -1,7 +1,152 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
   text-align: center;
+}
+
+.standard {
+  background: gray;
+  border: 1px solid black;
+  display: flex;
+  height: 2in;
+  width: 3.625in;
+}
+
+.standard>.label-body {
+  background: white;
+  border: 1px solid black;
+  border-radius: .125in;
+  margin: auto;
+  height: 1.9375in;
+  width: 3.5in;
+}
+
+.infusion {
+  background: gray;
+  border: 1px solid black;
+  display: flex;
+  height: 5.125in;
+  width: 3.125in;
+}
+
+.infusion>.label-body {
+  background: yellow;
+  border: 1px solid black;
+  border-radius: .125in;
+  height: 5in;
+  margin: auto;
+  width: 3in;
+}
+
+.infusion .upper-half {
+  border-bottom: 1px dashed gray;
+  height: 3in;
+  margin-bottom: .0625in;
+  width: 3in;
+}
+
+.infusion .lower-half {
+  border-top: 1px dotted gray;
+  height: 1.9375in;
+  margin-top: .0625in;
+  width: 3in;
+}
+
+header {
+  border-bottom: 1px solid black;
+  font-size: 7pt;
+  margin: .0625in .125in;
+}
+
+footer {
+  border-top: 1px solid black;
+  font-size: 7pt;
+  margin: .0625in .125in;
+}
+
+.dispensing-name-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hospital-name {
+  font-weight: bold;
+  text-align: center;
+}
+
+.hospital-info-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pt-info-block {
+  margin: .0625in 0;
+}
+
+.pt-id-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.drug-info-block {
+  margin: .0625in 0;
+}
+
+.label-content {
+  font-size: 8pt;
+  margin: .0625in .125in;
+}
+
+.drug-id-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.preparer-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pt-name {
+  font-weight: bold;
+}
+
+.drug {
+  font-weight: bold;
+}
+
+.drug-sig {
+  font-weight: bold;
+}
+
+.rx-info-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  font-family: sans-serif;
+}
+
+.preparation-date-block {
+  display: flex;
+  justify-content: space-between;
+  margin: .0625in 0;
+}
+
+.expiration-date {
+  font-weight: bold;
+}
+
+.drug-diluent,
+.drug-rate {
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
 }

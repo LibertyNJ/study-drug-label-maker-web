@@ -6,26 +6,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Study Drug Label Creator</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <link href="styles/style.css" rel="stylesheet">
+  <link href="styles/print.css" rel="stylesheet" media="print">
 </head>
 
 <body>
   <h1>Study Drug Label Creator</h1>
   <form>
     <fieldset>
-      <legend>Patient Name</legend>
-      <label for="last-name">Last: </label><input type="text" id="last-name" required>
-      <label for="first-name">First: </label><input type="text" id="first-name" required>
-      <label for="middle-initial">M.I.: </label><input type="text" id="middle-initial">
+      <legend>Label type:</legend>
+      <input type="radio" id="standard" name="label-type" value="standard" checked><label for="standard">Standard</label>
+      <input type="radio" id="infusion" name="label-type" value="infusion"><label for="infusion">Infusion</label>
     </fieldset>
     <fieldset>
-      <legend>Drug Information</legend>
+      <legend>Patient name</legend>
+      <label for="last-name">Last: </label><input type="text" id="last-name" name="last-name" required>
+      <label for="first-name">First: </label><input type="text" id="first-name" name="first-name" required>
+      <label for="middle-initial">M.I.: </label><input type="text" id="middle-initial" name="middle-initial">
+    </fieldset>
+    <fieldset>
+      <legend>Drug information</legend>
       <label for="drug-name">Name: </label><input type="text" id="drug-name" required>
       <label for="drug-strength">Strength: </label><input type="text" id="drug-strength" required>
       <label for="drug-form">Form: </label><input type="text" id="drug-form" required>
     </fieldset>
-    <button>Print Label</button>
+    <button id="print-button">Print Label</button>
   </form>
+  <h2>Label preview:</h2>
+  <div class="label standard">
+    <div class="label-body">
+      <header>
+        <p class="hospital-name">North Shore University Hospital</p>
+        <div class="hospital-info-block">
+          <p>300 Community Drive <br>
+            Manhasset, NY 11030</p>
+          <p>DEA# AN0768917 <br>
+            (516)562-4700</p>
+        </div>
+      </header>
+      <section class="label-content">
+        <div class="pt-info-block">
+          <div class="pt-id-block">
+            <div class="pt-name">Doe, Jane G.</div>
+            <div class="pt-dob">DoB: 03/20/1988</div>
+          </div>
+          <div class="pt-address">1234 Someplace Av, Apt. 5B <br>
+            Anytown, NY 11791</div>
+        </div>
+        <div class="rx-info-block">
+          <div class="protocol">Protocol: Yabbadabbadoo-SNDZ</div>
+          <div class="rx">Rx #12345</div>
+        </div>
+        <div class="drug-info-block">
+          <div class="drug-id-block">
+            <div class="drug">Drugitol, 100 mG tablet</div>
+            <div class="drug-manufacturer">Mfr: Liberty Pharma</div>
+          </div>
+          <div class="drug-qty">Qty: 5</div>
+          <div class="drug-sig">1 tab po qd</div>
+        </div>
+        <div class="preparer-block">
+          <div class="prescriber">Prescriber: Soandso M.D.</div>
+          <div class="rph">RPh: Somebody RPh</div>
+        </div>
+      </section>
+      <footer>
+        <div class="dispensing-name-block">
+          <div class="dispenser">Dispensed by: Somebody RPh</div>
+          <div class="receiver">Received by: That Guy RN</div>
+        </div>
+        <div class="date-dispensed">Dispensed: 11/19/2018 13:53</div>
+      </footer>
+    </div>
+  </div>
+  <div class="label infusion hidden">
+    <div class="label-body">
+      <div class="upper-half">
+        <header>
+          <p class="hospital-name">North Shore University Hospital</p>
+          <div class="hospital-info-block">
+            <p>300 Community Drive <br>
+              Manhasset, NY 11030</p>
+            <p>DEA# AN0768917 <br>
+              (516)562-4700</p>
+          </div>
+        </header>
+        <section class="label-content">
+          <div class="pt-info-block">
+            <div class="pt-id-block">
+              <div class="pt-name">Doe, Jane G.</div>
+              <div class="pt-dob">DoB: 03/20/1988</div>
+            </div>
+            <div class="pt-address">1234 Someplace Av, Apt. 5B <br>
+              Anytown, NY 11791</div>
+          </div>
+          <div class="rx-info-block">
+            <div class="protocol">Protocol: Yabbadabbadoo-SNDZ</div>
+            <div class="rx">Rx #12345</div>
+          </div>
+          <div class="drug-info-block">
+            <div class="drug-id-block">
+              <div class="drug">Drugitol, 100 mG</div>
+              <div class="drug-manufacturer">Mfr: Liberty Pharma</div>
+            </div>
+            <div class="drug-diluent">in 0.9% Sodium Chloride, 250 mL</div>
+            <div class="drug-rate">Rate: 125 mL/Hr</div>
+          </div>
+          <div class="preparation-date-block">
+            <div class="expiration-date">Expires: 11/20/2018 13:50</div>
+            <div class="prepared-date">Prepared: 11/19/2018 13:50</div>
+          </div>
+          <div class="preparer-block">
+            <div class="prescriber">Prescriber: Soandso M.D.</div>
+            <div class="rph">RPh: Somebody RPh</div>
+          </div>
+      </div>
+      <div class="lower-half">
+        </section>
+        <footer>
+          <div class="dispensing-name-block">
+            <div class="dispenser">Dispensed by: Somebody RPh</div>
+            <div class="receiver">Received by: That Guy RN</div>
+          </div>
+          <div class="date-dispensed">Dispensed: 11/19/2018 13:53</div>
+        </footer>
+      </div>
+    </div>
+  </div>
   <script src="scripts/script.js"></script>
 </body>
 
