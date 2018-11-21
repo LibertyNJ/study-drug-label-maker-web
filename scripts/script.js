@@ -1,14 +1,19 @@
 'use strict';
 
-const printButton = document.getElementById('print-button');
-
-printButton.addEventListener('click', function (event) {
-  event.preventDefault();
-  window.print();
-})
+const form = document.querySelector('form');
 
 window.onbeforeprint = prepareLabel;
 window.onafterprint = purgeLabel;
+
+// form.addEventListener('click', function (event) {
+//   event.preventDefault();
+
+//   const target = event.target;
+
+//   if (target.classList.contains('print-button')) {
+//     window.print();
+//   }
+// });
 
 function prepareLabel() {
 

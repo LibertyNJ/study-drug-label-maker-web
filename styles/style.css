@@ -1,11 +1,111 @@
+:root {
+  --northwell-dark-blue: rgb(0, 60, 165);
+  --northwell-gray: rgb(83, 86, 90);
+  --northwell-green: rgb(61, 173, 44);
+  --northwell-light-blue: rgb(0, 154, 223);
+  --northwell-purple: rgb(92, 11, 138);
+  --vertical-rhythm: 1.4rem;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  color: var(--northwell-gray);
+  font-size: 112.5%;
+}
+
 h1 {
+  color: var(--northwell-dark-blue);
+  font: bold 2.058rem/1.4 'Montserrat', sans-serif;
   text-align: center;
+}
+
+h2 {
+  color: var(--northwell-dark-blue);
+  font: 1.825rem/1.75 'Montserrat', sans-serif;
+}
+
+h3 {
+  color: var(--northwell-gray);
+  font: 1.618rem/1.75 'Montserrat', sans-serif;
+}
+
+legend {
+  color: var(--northwell-light-blue);
+  font: 1.128rem/1.3 'Montserrat', sans-serif;
+}
+
+label {
+  font: italic 1rem/1.4 'Montserrat', sans-serif;
+}
+
+input,
+textarea {
+  font: 1rem/1.4 'Montserrat', sans-serif;
+  margin-bottom: calc( 1 * var(--vertical-rhythm) );
+  padding: 0 .25em;
+}
+
+button {
+  color: var(--northwell-gray);
+  font: bold 1rem/1.4 'Montserrat', sans-serif;
+  margin: 0 auto;
+  padding: calc( .5 * var(--vertical-rhythm) );
+}
+
+address {
+  color: white;
+  font: 1rem/1.4 'Montserrat', sans-serif;
+  margin: calc(.5 * var(--vertical-rhythm)) var(--vertical-rhythm);
+  text-align: right;
+}
+
+fieldset {
+  padding: calc( .5 * var(--vertical-rhythm) );
+  margin-bottom: calc( 1 * var(--vertical-rhythm) );
+  width: max-content;
+}
+
+body {
+  display: grid;
+  gap: var(--vertical-rhythm);
+  grid: "header header header  header" auto
+        ".      form   preview .     " auto
+        ".      form   .       .     " auto
+        "footer footer footer  footer" auto
+    / var(--vertical-rhythm) 2fr 1fr var(--vertical-rhythm);
+}
+
+body>header {
+  grid-area: header;
+  height: calc(2 * var(--vertical-rhythm) );
+}
+
+body>footer {
+  align-items: center;
+  background: var(--northwell-gray);
+  display: flex;
+  grid-area: footer;
+  height: calc(3 * var(--vertical-rhythm) );
+  justify-content: space-between;
+}
+
+#label-preview {
+  color: black;
+  font: 8pt/1.125 sans-serif;
+  grid-area: preview;
+  height: auto;
+  position: sticky;
+  top: 0;
+  z-index: -1;
+}
+
+#label-information {
+  grid-area: form;
 }
 
 .standard {
@@ -20,8 +120,10 @@ h1 {
   background: white;
   border: 1px solid black;
   border-radius: .125in;
-  margin: auto;
   height: 1.9375in;
+  margin: auto;
+  overflow: hidden;
+  padding: .0625in .125in;
   width: 3.5in;
 }
 
@@ -39,6 +141,8 @@ h1 {
   border-radius: .125in;
   height: 5in;
   margin: auto;
+  overflow: hidden;
+  padding: .0625in .125in;
   width: 3in;
 }
 
@@ -56,97 +160,109 @@ h1 {
   width: 3in;
 }
 
-header {
+.label header {
   border-bottom: 1px solid black;
-  font-size: 7pt;
-  margin: .0625in .125in;
+  font: 7pt/1.15 sans-serif;
+  margin-bottom: .0625in;
 }
 
-footer {
+.label footer {
   border-top: 1px solid black;
-  font-size: 7pt;
-  margin: .0625in .125in;
-}
-
-.dispensing-name-block {
-  display: flex;
-  justify-content: space-between;
+  font: 7pt/1.15 sans-serif;
+  margin-top: .0625in;
 }
 
 .hospital-name {
-  font-weight: bold;
   text-align: center;
 }
 
-.hospital-info-block {
+.flex-row {
   display: flex;
   justify-content: space-between;
 }
 
-.pt-info-block {
-  margin: .0625in 0;
-}
-
-.pt-id-block {
+.form-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 }
 
-.drug-info-block {
+#label-preview section {
   margin: .0625in 0;
 }
 
 .label-content {
   font-size: 8pt;
-  margin: .0625in .125in;
 }
 
-.drug-id-block {
-  display: flex;
-  justify-content: space-between;
-}
-
-.preparer-block {
-  display: flex;
-  justify-content: space-between;
-}
-
-.pt-name {
-  font-weight: bold;
-}
-
-.drug {
-  font-weight: bold;
-}
-
-.drug-sig {
-  font-weight: bold;
-}
-
-.rx-info-block {
-  display: flex;
-  justify-content: space-between;
-}
 
 .label {
   font-family: sans-serif;
+  margin: 0 auto;
 }
 
-.preparation-date-block {
-  display: flex;
-  justify-content: space-between;
-  margin: .0625in 0;
-}
-
-.expiration-date {
-  font-weight: bold;
-}
-
+.drug,
 .drug-diluent,
-.drug-rate {
+.drug-rate,
+.drug-sig,
+.expiration-date,
+.hospital-name,
+.pt-name {
   font-weight: bold;
 }
 
 .hidden {
   display: none;
+}
+
+.radio-form-control {
+  display: inline-block;
+  margin: 0 calc( .5 * var(--vertical-rhythm) );
+}
+
+.text-form-control {
+  display: inline-block;
+  margin: 0 calc( .5 * var(--vertical-rhythm) );
+}
+
+.text-form-control>label {
+  display: block;
+}
+
+#logo {
+  display: block;
+  height: calc(2 * var(--vertical-rhythm));
+  margin-left: var(--vertical-rhythm);
+}
+
+#patient-middle-initial {
+  width: 2em;
+}
+
+#patient-state {
+  width: 3em;
+}
+
+#patient-zip-code {
+  width: 8em;
+}
+
+#drug-strength {
+  width: 7em;
+}
+
+#drug-form {
+  width: 7em;
+}
+
+input[type="date"] {
+
+}
+
+input[type="datetime-local"] {
+
+}
+
+#sig {
+  height: calc( 2 * var(--vertical-rhythm) );
+  width: 16em;
 }
