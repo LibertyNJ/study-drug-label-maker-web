@@ -1,5 +1,9 @@
 'use strict';
 
+let now, currentYear, currentMonth, currentDate, currentHours, currentMinutes, currentSeconds;
+
+updateCurrentTime();
+
 const form = document.forms[0];
 
 const formElement = document.getElementsByTagName('form')[0];
@@ -101,7 +105,6 @@ function updateLabelPreview() {
   const labelPatientAddress1 = document.getElementById('label-patient-address-1');
   const labelPatientAddress2 = document.getElementById('label-patient-address-2');
   const labelProtocol = document.getElementById('label-protocol');
-  const labelRxNumber = document.getElementById('label-rx-number');
   const labelDrug = document.getElementById('label-drug');
   const labelDrugManufacturer = document.getElementById('label-drug-manufacturer');
   const labelDrugQuantity = document.getElementById('label-drug-quantity');
@@ -134,7 +137,6 @@ function updateLabelPreview() {
   labelPatientAddress1.textContent = `${patientAddress1}${(patientAddress2) ? ', ' : ''}${patientAddress2}`;
   labelPatientAddress2.textContent = `${patientCity}${(patientCity) ? ', ' : ''}${patientState} ${patientZipCode}`;
   labelProtocol.textContent = `Protocol: ${protocol}`;
-  labelRxNumber.textContent = `Rx #${rxNumber}`;
   labelDrug.textContent = `${drugName}${(drugName && drugStrength) ? ', ' : ''}${drugStrength} ${(label.classList.contains('standard')) ? drugForm : ''}`;
   labelDrugManufacturer.textContent = `Mfr: ${drugManufacturer}`;
   labelDrugQuantity.textContent = `Qty: ${drugQuantity}`;
@@ -157,26 +159,25 @@ window.onbeforeprint = prepareLabel;
 window.onafterprint = purgeLabel;
 
 function prepareLabel() {
+  updateCurrentTime();
+  stampRxNumber();
   stampDispensedDatetime();
+
+  function stampDispensedDatetime() {
+    const labelDispensedDatetime = document.getElementById('label-dispensed-datetime');
+    labelDispensedDatetime.textContent = `Date and time: ${currentMonth}/${currentDate}/${currentYear} ${currentHours}:${currentMinutes}`;
+  }
+
+  function stampRxNumber() {
+    const labelRxNumber = document.getElementById('label-rx-number');
+    labelRxNumber.textContent = `Rx #${currentYear}${currentMonth}${currentDate}${currentHours}${currentMinutes}${currentSeconds}`;
+  }
 }
 
 function purgeLabel() {
 
 }
 
-function stampDispensedDatetime() {
-  const now = new Date();
-
-  const currentDate = now.getDate().toString().padStart(2, '0');
-  const currentHours = now.getHours().toString().padStart(2, '0');
-  const currentMinutes = now.getMinutes().toString().padStart(2, '0');
-  const currentMonth = (now.getMonth() + 1).toString().padStart(2, '0');
-  const currentYear = now.getFullYear().toString().padStart(4, '0');
-
-  const labelDispensedDatetime = document.getElementById('label-dispensed-datetime');
-
-  labelDispensedDatetime.textContent = `Date and time: ${currentMonth}/${currentDate}/${currentYear} ${currentHours}:${currentMinutes}`;
-}
 
 function makeFieldRequired(field) {
   field.required = true;
@@ -192,4 +193,15 @@ function hideElement(element) {
 
 function showElement(element) {
   element.classList.remove('hidden');
+}
+
+function updateCurrentTime() {
+  now = new Date();
+
+  currentYear = now.getFullYear().toString().padStart(4, '0');
+  currentMonth = (now.getMonth() + 1).toString().padStart(2, '0');
+  currentDate = now.getDate().toString().padStart(2, '0');
+  currentHours = now.getHours().toString().padStart(2, '0');
+  currentMinutes = now.getMinutes().toString().padStart(2, '0');
+  currentSeconds = now.getSeconds().toString().padStart(2, '0');
 }

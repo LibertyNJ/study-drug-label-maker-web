@@ -207,6 +207,18 @@
     margin-left: 1em;
   }
 
+  nav a:visited {
+    color: var(--northwell-dark-blue);
+  }
+
+  nav a:hover {
+    color: var(--northwell-light-blue);
+  }
+
+  nav a:active {
+    color: var(--northwell-purple);
+  }
+
   nav ul {
     list-style: none;
   }
