@@ -4,3 +4,7 @@ body>footer,
 #label-information {
   display: none;
 }
+
+@page {
+  margin: 0;
+}
