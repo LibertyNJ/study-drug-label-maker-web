@@ -1,207 +1,231 @@
 'use strict';
 
-let now, currentYear, currentMonth, currentDate, currentHours, currentMinutes, currentSeconds;
-
-updateCurrentTime();
-
-const form = document.forms[0];
-
-const formElement = document.getElementsByTagName('form')[0];
-
-const formControls = document.querySelectorAll('.form-control');
-
-const labelFields = document.querySelectorAll('.label-field');
-
-const VERSION_NUMBER = 'a1';
-
+const VERSION_NUMBER = 'a2';
 const versionElement = document.getElementById('version');
-
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
+const formElement = document.getElementsByTagName('form')[0];
+const formControlElements = document.querySelectorAll('.form-control');
+
+const labelElement = document.getElementById('label');
+const labelFieldElements = document.querySelectorAll('.label-field');
+
 hideForm();
+hideElement(labelElement);
 
-function hideForm() {
-  for (let child of formElement.children) {
-    if (child.tagName != 'FIELDSET') {
-      child.classList.add('hidden');
-    }
-  }
-}
-
-function displayForm() {
-  for (let child of formElement.children) {
-    child.classList.remove('hidden')
-  }
-}
-
-const label = document.getElementById('label');
-
-label.classList.add('hidden');
-
-//Type selector
-form.addEventListener('click', function (event) {
-  const target = event.target;
-
-  if (target.name == 'label-type') {
-    label.classList.remove('standard', 'infusion', 'hidden');
-    label.classList.add(target.value);
-
-    for (let formControl of formControls) {
-      formControl.classList.remove('hidden');
-
-      if (!(formControl.children[1].classList.contains('optional'))) {
-        formControl.children[1].required = true;
-      }
-
-      if (!(formControl.classList.contains(target.value))) {
-        formControl.classList.add('hidden');
-        formControl.children[1].required = false;
-      }
-    }
-
-    for (let labelField of labelFields) {
-      labelField.classList.remove('hidden');
-
-      if (!(labelField.classList.contains(target.value))) {
-        labelField.classList.add('hidden');
-      }
-    }
-
-    displayForm();
-  }
-});
-
-//Preview updater
-form.addEventListener('input', updateLabelPreview);
-
-function updateLabelPreview() {
-  const patientLastName = document.getElementById('patient-last-name').value;
-  const patientFirstName = document.getElementById('patient-first-name').value;
-  const patientMiddleInitial = document.getElementById('patient-middle-initial').value;
-  const patientDob = new Date(document.getElementById('patient-dob').value + 'T00:00:00');
-  const patientAddress1 = document.getElementById('patient-address-1').value;
-  const patientAddress2 = document.getElementById('patient-address-2').value;
-  const patientCity = document.getElementById('patient-city').value;
-  const patientState = document.getElementById('patient-state').value;
-  const patientZipCode = document.getElementById('patient-zip-code').value;
-  const protocol = document.getElementById('protocol').value;
-  const rxNumber = document.getElementById('rx-number').value;
-  const drugName = document.getElementById('drug-name').value;
-  const drugStrength = document.getElementById('drug-strength').value;
-  const drugForm = document.getElementById('drug-form').value;
-  const drugManufacturer = document.getElementById('drug-manufacturer').value;
-  const drugDiluent = document.getElementById('drug-diluent').value;
-  const drugDiluentVolume = document.getElementById('drug-diluent-volume').value;
-  const drugQuantity = document.getElementById('drug-quantity').value;
-  const drugRate = document.getElementById('drug-rate').value;
-  const sig = document.getElementById('sig').value;
-  const expirationDatetime = new Date(document.getElementById('expiration-datetime').value);
-  const preparationDatetime = new Date(document.getElementById('preparation-datetime').value);
-  const prescriber = document.getElementById('prescriber').value;
-  const pharmacist = document.getElementById('pharmacist').value;
-
-  const labelPatientName = document.getElementById('label-patient-name');
-  const labelPatientDob = document.getElementById('label-patient-dob');
-  const labelPatientAddress1 = document.getElementById('label-patient-address-1');
-  const labelPatientAddress2 = document.getElementById('label-patient-address-2');
-  const labelProtocol = document.getElementById('label-protocol');
-  const labelDrug = document.getElementById('label-drug');
-  const labelDrugManufacturer = document.getElementById('label-drug-manufacturer');
-  const labelDrugQuantity = document.getElementById('label-drug-quantity');
-  const labelSig = document.getElementById('label-sig');
-  const labelDrugDiluent = document.getElementById('label-drug-diluent');
-  const labelDrugRate = document.getElementById('label-drug-rate');
-  const labelExpirationDatetime = document.getElementById('label-expiration-datetime');
-  const labelPreparationDatetime = document.getElementById('label-preparation-datetime');
-  const labelPrescriber = document.getElementById('label-prescriber');
-  const labelPharmacist = document.getElementById('label-pharmacist');
-
-  const patientDobMonth = (patientDob.getMonth() || patientDob.getMonth() === 0) ? (patientDob.getMonth() + 1).toString().padStart(2, '0') : '';
-  const patientDobDate = (patientDob.getDate()) ? patientDob.getDate().toString().padStart(2, '0') : '';
-  const patientDobYear = (patientDob.getFullYear()) ? patientDob.getFullYear().toString().padStart(4, '0') : '';
-
-  const expirationMonth = (expirationDatetime.getMonth() || expirationDatetime.getMonth() === 0) ? (expirationDatetime.getMonth() + 1).toString().padStart(2, '0') : '';
-  const expirationDate = (expirationDatetime.getDate()) ? expirationDatetime.getDate().toString().padStart(2, '0') : '';
-  const expirationYear = (expirationDatetime.getFullYear()) ? expirationDatetime.getFullYear().toString().padStart(4, '0') : '';
-  const expirationHours = (expirationDatetime.getHours()) ? expirationDatetime.getHours().toString().padStart(2, '0') : '';
-  const expirationMinutes = (expirationDatetime.getMinutes()) ? expirationDatetime.getMinutes().toString().padStart(2, '0') : '';
-
-  const preparationMonth = (preparationDatetime.getMonth() || preparationDatetime.getMonth() === 0) ? (preparationDatetime.getMonth() + 1).toString().padStart(2, '0') : '';
-  const preparationDate = (preparationDatetime.getDate()) ? preparationDatetime.getDate().toString().padStart(2, '0') : '';
-  const preparationYear = (preparationDatetime.getFullYear()) ? preparationDatetime.getFullYear().toString().padStart(4, '0') : '';
-  const preparationHours = (preparationDatetime.getHours()) ? preparationDatetime.getHours().toString().padStart(2, '0') : '';
-  const preparationMinutes = (preparationDatetime.getMinutes()) ? preparationDatetime.getMinutes().toString().padStart(2, '0') : '';
-
-  labelPatientName.textContent = `${patientLastName}${(patientLastName && patientFirstName) ? ',' : ''} ${patientFirstName} ${patientMiddleInitial}${(patientMiddleInitial) ? '.' : ''}`;
-  labelPatientDob.textContent = `DoB: ${patientDobMonth}${(patientDobMonth && patientDobDate) ? '/' : ''}${patientDobDate}${(patientDobDate && patientDobYear) ? '/' : ''}${patientDobYear}`;
-  labelPatientAddress1.textContent = `${patientAddress1}${(patientAddress2) ? ', ' : ''}${patientAddress2}`;
-  labelPatientAddress2.textContent = `${patientCity}${(patientCity) ? ', ' : ''}${patientState} ${patientZipCode}`;
-  labelProtocol.textContent = `Protocol: ${protocol}`;
-  labelDrug.textContent = `${drugName}${(drugName && drugStrength) ? ', ' : ''}${drugStrength} ${(label.classList.contains('standard')) ? drugForm : ''}`;
-  labelDrugManufacturer.textContent = `Mfr: ${drugManufacturer}`;
-  labelDrugQuantity.textContent = `Qty: ${drugQuantity}`;
-  labelSig.textContent = sig;
-  labelDrugDiluent.textContent = `${(drugDiluent) ? 'in ' : ''}${drugDiluent}${(drugDiluent && drugDiluentVolume) ? ', ' : ''}${drugDiluentVolume}`;
-  labelDrugRate.textContent = `Rate: ${drugRate}`;
-  labelExpirationDatetime.textContent = `Exp: ${expirationMonth}${(expirationMonth && expirationDate) ? '/' : ''}${expirationDate}${(expirationDate && expirationYear) ? '/' : ''}${expirationYear} ${expirationHours}${(expirationHours && expirationMinutes) ? ':' : ''}${expirationMinutes}`;
-  labelPreparationDatetime.textContent = `Prep: ${preparationMonth}${(preparationMonth && preparationDate) ? '/' : ''}${preparationDate}${(preparationDate && preparationYear) ? '/' : ''}${preparationYear} ${preparationHours}${(preparationHours && preparationMinutes) ? ':' : ''}${preparationMinutes}`;
-  labelPrescriber.textContent = `Prescriber: ${prescriber}`;
-  labelPharmacist.textContent = `Pharmacist: ${pharmacist}`;
-}
-
-//Print function
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
-  window.print();
-});
+formElement.addEventListener('input', (event) => formInputHandler(event));
+formElement.addEventListener('submit', (event) => formSubmitHandler(event));
 
 window.onbeforeprint = prepareLabel;
-window.onafterprint = purgeLabel;
 
-function prepareLabel() {
-  updateCurrentTime();
-  stampRxNumber();
-  stampDispensedDatetime();
+function padLeadingZeros(number, zeros) {
+  return number.toString().padStart(zeros, '0');
+}
 
-  function stampDispensedDatetime() {
-    const labelDispensedDatetime = document.getElementById('label-dispensed-datetime');
-    labelDispensedDatetime.textContent = `Date and time: ${currentMonth}/${currentDate}/${currentYear} ${currentHours}:${currentMinutes}`;
+function formInputHandler(event) {
+  const eventTarget = event.target;
+
+  if (eventTarget.name == 'label-type') {
+    setLabelType();
+    updateLabelLayout();
+    updateFormLayout();
+    showForm();
+  } else {
+    updateLabel();
   }
 
-  function stampRxNumber() {
-    const labelRxNumber = document.getElementById('label-rx-number');
-    labelRxNumber.textContent = `Rx #${currentYear}${currentMonth}${currentDate}${currentHours}${currentMinutes}${currentSeconds}`;
+  function setLabelType() {
+    labelElement.classList.remove('standard', 'infusion', 'hidden');
+    labelElement.classList.add(eventTarget.value);
   }
+
+  function showForm() {
+    for (let child of formElement.children) {
+      showElement(child);
+    }
+  }
+
+  function updateLabelLayout() {
+    for (let labelFieldElement of labelFieldElements) {
+      showElement(labelFieldElement);
+
+      if (!(labelFieldElement.classList.contains(eventTarget.value))) {
+        hideElement(labelFieldElement);
+      }
+    }
+  }
+
+  function updateFormLayout() {
+    for (let formControl of formControlElements) {
+      showElement(formControl);
+
+      const formFieldElement = formControl.children[1];
+
+      if (!(formFieldElement.classList.contains('optional'))) {
+        formFieldElement.required = true;
+      }
+
+      if (!(formControl.classList.contains(eventTarget.value))) {
+        formFieldElement.required = false;
+        hideElement(formControl);
+      }
+    }
+  }
+
+  function updateLabel() {
+    const patient = {
+      name: {
+        last: getElementValueById('patient-last-name'),
+        first: getElementValueById('patient-first-name'),
+        middleInitial: getElementValueById('patient-middle-initial')
+      },
+
+      dob: {
+        full: new Date(getElementValueById('patient-dob') + 'T00:00:00'),
+        get month() { return (this.full.getMonth() || this.full.getMonth() === 0) ? padLeadingZeros(this.full.getMonth() + 1, 2) : '' },
+        get date() { return (this.full.getDate()) ? padLeadingZeros(this.full.getDate(), 2) : '' },
+        get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' }
+      },
+
+      address: {
+        street: getElementValueById('patient-address-1'),
+        apartment: getElementValueById('patient-address-2'),
+        city: getElementValueById('patient-city'),
+        state: getElementValueById('patient-state'),
+        zipCode: getElementValueById('patient-zip-code')
+      }
+    };
+
+    const protocol = getElementValueById('protocol');
+
+    const drug = {
+      name: getElementValueById('drug-name'),
+      strength: getElementValueById('drug-strength'),
+      form: getElementValueById('drug-form'),
+      manufacturer: getElementValueById('drug-manufacturer'),
+
+      diluent: {
+        name: getElementValueById('drug-diluent'),
+        volume: getElementValueById('drug-diluent-volume')
+      },
+
+      quantity: getElementValueById('drug-quantity'),
+      rate: getElementValueById('drug-rate'),
+      sig: getElementValueById('sig'),
+
+      expiration: {
+        full: new Date(getElementValueById('expiration-datetime')),
+        get month() { return (this.full.getMonth() || this.full.getMonth() === 0) ? padLeadingZeros(this.full.getMonth() + 1, 2) : '' },
+        get date() { return (this.full.getDate()) ? padLeadingZeros(this.full.getDate(), 2) : '' },
+        get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' },
+        get hours() { return (this.full.getHours()) ? padLeadingZeros(this.full.getHours(), 2) : '' },
+        get minutes() { return (this.full.getMinutes()) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
+      },
+
+      preparation: {
+        full: new Date(getElementValueById('preparation-datetime')),
+        get month() { return (this.full.getMonth() || this.full.getMonth() === 0) ? padLeadingZeros(this.full.getMonth() + 1, 2) : '' },
+        get date() { return (this.full.getDate()) ? padLeadingZeros(this.full.getDate(), 2) : '' },
+        get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' },
+        get hours() { return (this.full.getHours()) ? padLeadingZeros(this.full.getHours(), 2) : '' },
+        get minutes() { return (this.full.getMinutes()) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
+      }
+    };
+
+    const prescriber = getElementValueById('prescriber');
+    const pharmacist = getElementValueById('pharmacist');
+
+    const label = {
+      name: document.getElementById('label-patient-name'),
+      dob: document.getElementById('label-patient-dob'),
+      addressLine1: document.getElementById('label-patient-address-1'),
+      addressLine2: document.getElementById('label-patient-address-2'),
+
+      protocol: document.getElementById('label-protocol'),
+
+      drug: document.getElementById('label-drug'),
+      manufacturer: document.getElementById('label-drug-manufacturer'),
+      quantity: document.getElementById('label-drug-quantity'),
+      sig: document.getElementById('label-sig'),
+      diluent: document.getElementById('label-drug-diluent'),
+      rate: document.getElementById('label-drug-rate'),
+
+      expiration: document.getElementById('label-expiration-datetime'),
+      preparation: document.getElementById('label-preparation-datetime'),
+
+      prescriber: document.getElementById('label-prescriber'),
+      pharmacist: document.getElementById('label-pharmacist')
+    };
+
+    label.name.textContent = `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
+    label.dob.textContent = `DoB: ${patient.dob.month}${(patient.dob.month && patient.dob.date) ? '/' : ''}${patient.dob.date}${(patient.dob.date && patient.dob.year) ? '/' : ''}${patient.dob.year}`;
+    label.addressLine1.textContent = `${patient.address.street}${(patient.address.apartment) ? ', ' : ''}${patient.address.apartment}`;
+    label.addressLine2.textContent = `${patient.address.city}${(patient.address.city) ? ', ' : ''} ${patient.address.state} ${patient.address.zipCode}`;
+
+    label.protocol.textContent = `Protocol: ${protocol}`;
+
+    label.drug.textContent = `${drug.name}${(drug.name && drug.strength) ? ', ' : ''}${drug.strength} ${(labelElement.classList.contains('standard')) ? drug.form : ''}`;
+    label.manufacturer.textContent = `Mfr: ${drug.manufacturer}`;
+    label.quantity.textContent = `Qty: ${drug.quantity}`;
+    label.sig.textContent = drug.sig;
+    label.diluent.textContent = `${(drug.diluent.name) ? 'in ' : ''}${drug.diluent.name}${(drug.diluent.name && drug.diluent.volume) ? ', ' : ''}${drug.diluent.volume}`;
+    label.rate.textContent = `Rate: ${drug.rate}`;
+
+    label.expiration.textContent = `Exp: ${drug.expiration.month}${(drug.expiration.month && drug.expiration.date) ? '/' : ''}${drug.expiration.date}${(drug.expiration.date && drug.expiration.year) ? '/' : ''}${drug.expiration.year} ${drug.expiration.hours}${(drug.expiration.hours && drug.expiration.minutes) ? ':' : ''}${drug.expiration.minutes}`;
+    label.preparation.textContent = `Prep: ${drug.preparation.month}${(drug.preparation.month && drug.preparation.date) ? '/' : ''}${drug.preparation.date}${(drug.preparation.date && drug.preparation.year) ? '/' : ''}${drug.preparation.year} ${drug.preparation.hours}${(drug.preparation.hours && drug.preparation.minutes) ? ':' : ''}${drug.preparation.minutes}`;
+
+    label.prescriber.textContent = `Prescriber: ${prescriber}`;
+    label.pharmacist.textContent = `Pharmacist: ${pharmacist}`;
+  }
+  console.log(patient.name.last);
 }
 
-function purgeLabel() {
-
+function formSubmitHandler(event) {
+  event.preventDefault();
+  window.print();
 }
 
-
-function makeFieldRequired(field) {
-  field.required = true;
-}
-
-function makeFieldNotRequired(field) {
-  field.required = false;
+function getElementValueById(fieldId) {
+  return document.getElementById(fieldId).value;
 }
 
 function hideElement(element) {
   element.classList.add('hidden');
 }
 
-function showElement(element) {
-  element.classList.remove('hidden');
+function hideForm() {
+  for (let child of formElement.children) {
+    if (child.tagName != 'FIELDSET') {
+      hideElement(child);
+    }
+  }
 }
 
-function updateCurrentTime() {
-  now = new Date();
+function prepareLabel() {
+  const now = {
+    full: new Date(),
+    get year() { return padLeadingZeros(this.full.getFullYear(), 4) },
+    get month() { return padLeadingZeros(this.full.getMonth() + 1, 2) },
+    get date() { return padLeadingZeros(this.full.getDate(), 2) },
+    get hours() { return padLeadingZeros(this.full.getHours(), 2) },
+    get minutes() { return padLeadingZeros(this.full.getMinutes(), 2) },
+    get seconds() { return padLeadingZeros(this.full.getSeconds(), 2) }
+  };
 
-  currentYear = now.getFullYear().toString().padStart(4, '0');
-  currentMonth = (now.getMonth() + 1).toString().padStart(2, '0');
-  currentDate = now.getDate().toString().padStart(2, '0');
-  currentHours = now.getHours().toString().padStart(2, '0');
-  currentMinutes = now.getMinutes().toString().padStart(2, '0');
-  currentSeconds = now.getSeconds().toString().padStart(2, '0');
+  stampRxNumber();
+  stampDispensedDatetime();
+
+  function stampDispensedDatetime() {
+    const labelDispensedDatetime = document.getElementById('label-dispensed-datetime');
+    labelDispensedDatetime.textContent = `Date and time: ${now.month}/${now.date}/${now.year} ${now.hours}:${now.minutes}`;
+  }
+
+  function stampRxNumber() {
+    const labelRxNumber = document.getElementById('label-rx-number');
+    labelRxNumber.textContent = `Rx #${now.year}${now.month}${now.date}${now.hours}${now.minutes}${now.seconds}`;
+  }
+}
+
+function showElement(element) {
+  element.classList.remove('hidden');
 }
