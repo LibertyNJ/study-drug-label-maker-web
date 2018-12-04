@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION_NUMBER = 'b1';
+const VERSION_NUMBER = 'b2';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
@@ -10,6 +10,7 @@ const formControlElements = document.querySelectorAll('.form-control');
 const labelElement = document.getElementById('label');
 const labelFieldElements = document.querySelectorAll('.label-field');
 
+let completedPrinting = true;
 let drugHasNoStrength = false;
 let overrideRxNumber = false;
 
@@ -19,7 +20,8 @@ hideElement(labelElement);
 formElement.addEventListener('input', (event) => formInputHandler(event));
 formElement.addEventListener('submit', (event) => formSubmitHandler(event));
 
-window.onbeforeprint = prepareLabel;
+window.onbeforeprint = preFlight;
+window.onafterprint = postFlight;
 
 function formInputHandler(event) {
   const eventTarget = event.target;
@@ -257,7 +259,17 @@ function padLeadingZeros(number, zeros) {
   return number.toString().padStart(zeros, '0');
 }
 
-function prepareLabel() {
+function postFlight() {
+  completedPrinting = window.confirm(`Are you sure that you printed all the labels you need? If you leave the print window and reprint the label, the Rx # will change!
+
+Press "OK" to continue, or "Cancel" to go back to the print window.`);
+
+  if (!completedPrinting) {
+    setTimeout(window.print, 50); //setTimeout() fixes an issue where reprinting immediately attempts to print a blank document. I suspect this is probably due to the confirmation window being considered the active window.
+  }
+}
+
+function preFlight() {
   const now = {
     full: new Date(),
     get year() { return padLeadingZeros(this.full.getFullYear(), 4) },
@@ -268,7 +280,7 @@ function prepareLabel() {
     get seconds() { return padLeadingZeros(this.full.getSeconds(), 2) }
   };
 
-  if (!overrideRxNumber) {
+  if (!overrideRxNumber && completedPrinting) {
     stampRxNumber();
   }
 
