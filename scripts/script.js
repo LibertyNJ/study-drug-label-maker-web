@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION_NUMBER = 'a2';
+const VERSION_NUMBER = 'b1';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
