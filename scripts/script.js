@@ -10,6 +10,8 @@ const formControlElements = document.querySelectorAll('.form-control');
 const labelElement = document.getElementById('label');
 const labelFieldElements = document.querySelectorAll('.label-field');
 
+let drugHasNoStrength = false;
+
 hideForm();
 hideElement(labelElement);
 
@@ -21,11 +23,24 @@ window.onbeforeprint = prepareLabel;
 function formInputHandler(event) {
   const eventTarget = event.target;
 
-  if (eventTarget.name == 'label-type') {
+  if (eventTarget.name === 'label-type') {
     setLabelType();
     updateLabelLayout();
     updateFormLayout();
     showForm();
+
+  } else if (eventTarget.name === 'drug-no-strength') {
+
+    if (eventTarget.checked === true) {
+      drugHasNoStrength = true;
+
+    } else {
+      drugHasNoStrength = false;
+    }
+
+    updateFormLayout();
+    updateLabel();
+
   } else {
     updateLabel();
   }
@@ -53,17 +68,31 @@ function formInputHandler(event) {
 
   function updateFormLayout() {
     for (let formControl of formControlElements) {
-      showElement(formControl);
-
       const formFieldElement = formControl.children[1];
 
-      if (!(formFieldElement.classList.contains('optional'))) {
-        formFieldElement.required = true;
+      if (eventTarget.name === 'label-type') {
+        showElement(formControl);
+
+        if (!(formFieldElement.classList.contains('optional'))) {
+          formFieldElement.required = true;
+        }
+
+        if (!(formControl.classList.contains(eventTarget.value))) {
+          formFieldElement.required = false;
+          hideElement(formControl);
+        }
       }
 
-      if (!(formControl.classList.contains(eventTarget.value))) {
-        formFieldElement.required = false;
-        hideElement(formControl);
+      if (formFieldElement.id === 'drug-strength') {
+
+        if (drugHasNoStrength) {
+          formFieldElement.required = false;
+          hideElement(formControl);
+
+        } else {
+          formFieldElement.required = true;
+          showElement(formControl);
+        }
       }
     }
   }
@@ -96,7 +125,7 @@ function formInputHandler(event) {
 
     const drug = {
       name: getElementValueById('drug-name'),
-      strength: getElementValueById('drug-strength'),
+      strength: (drugHasNoStrength) ? '' : getElementValueById('drug-strength'),
       form: getElementValueById('drug-form'),
       manufacturer: getElementValueById('drug-manufacturer'),
 

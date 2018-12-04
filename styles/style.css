@@ -308,7 +308,7 @@
     justify-content: start;
   }
 
-  .radio-form-control {
+  .clickable-form-control {
     display: inline-block;
     margin: 0 calc( .5 * var(--vertical-rhythm) );
   }
@@ -317,6 +317,10 @@
   #drug-form,
   #drug-strength {
     width: 7em;
+  }
+
+  #drug-no-strength {
+    margin-left: 14em;
   }
 
   #help {

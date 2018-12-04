@@ -23,8 +23,8 @@
       <fieldset>
         <legend>Label type</legend>
         <div class="form-row">
-          <div class="radio-form-control"><input type="radio" id="standard" name="label-type" value="standard"><label class="inline" for="standard"> Standard</label></div>
-          <div class="radio-form-control"><input type="radio" id="infusion" name="label-type" value="infusion"><label class="inline" for="infusion"> Infusion</label></div>
+          <div class="clickable-form-control"><input type="radio" id="standard" name="label-type" value="standard"><label class="inline" for="standard"> Standard</label></div>
+          <div class="clickable-form-control"><input type="radio" id="infusion" name="label-type" value="infusion"><label class="inline" for="infusion"> Infusion</label></div>
         </div>
       </fieldset>
       <section id="patient">
@@ -120,6 +120,9 @@
           <div class="form-control standard infusion"><label for="drug-strength">Strength</label><input type="text" id="drug-strength" class="standard infusion" placeholder="100 mG…" required></div>
           <div class="form-control standard"><label for="drug-form">Form</label><input type="text" id="drug-form" class="standard" placeholder="Tablet…" required></div>
           <div class="form-control standard infusion"><label for="drug-manufacturer">Manufacturer</label><input type="text" id="drug-manufacturer" class="standard infusion" name="drug-manufacturer" placeholder="Liberty Pharma…" required></div>
+        </div>
+        <div class="form-row">
+          <div class="clickable-form-control standard infusion"><input type="checkbox" name="drug-no-strength" id="drug-no-strength"><label for="drug-no-strength"> This medication has no strength</label></div>
         </div>
         <div class="form-row">
           <div class="form-control infusion"><label for="drug-diluent">Diluent</label><input type="text" id="drug-diluent" class="infusion" name="drug-diluent" placeholder="0.9% Sodium Chloride…" required></div>
