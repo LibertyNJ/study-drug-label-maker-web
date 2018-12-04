@@ -18,10 +18,6 @@ formElement.addEventListener('submit', (event) => formSubmitHandler(event));
 
 window.onbeforeprint = prepareLabel;
 
-function padLeadingZeros(number, zeros) {
-  return number.toString().padStart(zeros, '0');
-}
-
 function formInputHandler(event) {
   const eventTarget = event.target;
 
@@ -157,18 +153,18 @@ function formInputHandler(event) {
       pharmacist: document.getElementById('label-pharmacist')
     };
 
-    label.name.textContent = `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
+    label.name.textContent = (!patient.name.last && !patient.name.first && !patient.name.middleInitial) ? 'Patient name' : `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
     label.dob.textContent = `DoB: ${patient.dob.month}${(patient.dob.month && patient.dob.date) ? '/' : ''}${patient.dob.date}${(patient.dob.date && patient.dob.year) ? '/' : ''}${patient.dob.year}`;
-    label.addressLine1.textContent = `${patient.address.street}${(patient.address.apartment) ? ', ' : ''}${patient.address.apartment}`;
-    label.addressLine2.textContent = `${patient.address.city}${(patient.address.city) ? ', ' : ''} ${patient.address.state} ${patient.address.zipCode}`;
+    label.addressLine1.textContent = (!patient.address.street && !patient.address.apartment) ? 'Patient address line 1' : `${patient.address.street}${(patient.address.apartment) ? ', ' : ''}${patient.address.apartment}`;
+    label.addressLine2.textContent = (!patient.address.city && !patient.address.state && !patient.address.zipCode) ? 'Patient address line 2' : `${patient.address.city}${(patient.address.city) ? ', ' : ''} ${patient.address.state} ${patient.address.zipCode}`;
 
     label.protocol.textContent = `Protocol: ${protocol}`;
 
-    label.drug.textContent = `${drug.name}${(drug.name && drug.strength) ? ', ' : ''}${drug.strength} ${(labelElement.classList.contains('standard')) ? drug.form : ''}`;
+    label.drug.textContent = (!drug.name && !drug.strength && !drug.form) ? 'Medication information' : `${drug.name}${(drug.name && drug.strength) ? ', ' : ''}${drug.strength} ${(labelElement.classList.contains('standard')) ? drug.form : ''}`;
     label.manufacturer.textContent = `Mfr: ${drug.manufacturer}`;
     label.quantity.textContent = `Qty: ${drug.quantity}`;
-    label.sig.textContent = drug.sig;
-    label.diluent.textContent = `${(drug.diluent.name) ? 'in ' : ''}${drug.diluent.name}${(drug.diluent.name && drug.diluent.volume) ? ', ' : ''}${drug.diluent.volume}`;
+    label.sig.textContent = (!drug.sig) ? 'Sig' : drug.sig;
+    label.diluent.textContent = (!drug.diluent.name && !drug.diluent.volume) ? 'Diluent information' : `${(drug.diluent.name) ? 'in ' : ''}${drug.diluent.name}${(drug.diluent.name && drug.diluent.volume) ? ', ' : ''}${drug.diluent.volume}`;
     label.rate.textContent = `Rate: ${drug.rate}`;
 
     label.expiration.textContent = `Exp: ${drug.expiration.month}${(drug.expiration.month && drug.expiration.date) ? '/' : ''}${drug.expiration.date}${(drug.expiration.date && drug.expiration.year) ? '/' : ''}${drug.expiration.year} ${drug.expiration.hours}${(drug.expiration.hours && drug.expiration.minutes) ? ':' : ''}${drug.expiration.minutes}`;
@@ -177,7 +173,6 @@ function formInputHandler(event) {
     label.prescriber.textContent = `Prescriber: ${prescriber}`;
     label.pharmacist.textContent = `Pharmacist: ${pharmacist}`;
   }
-  console.log(patient.name.last);
 }
 
 function formSubmitHandler(event) {
@@ -199,6 +194,10 @@ function hideForm() {
       hideElement(child);
     }
   }
+}
+
+function padLeadingZeros(number, zeros) {
+  return number.toString().padStart(zeros, '0');
 }
 
 function prepareLabel() {
