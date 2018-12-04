@@ -319,7 +319,8 @@
     width: 7em;
   }
 
-  #drug-no-strength {
+  #drug-no-strength,
+  #rx-number-override {
     margin-left: 14em;
   }
 

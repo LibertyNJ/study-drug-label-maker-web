@@ -11,6 +11,7 @@ const labelElement = document.getElementById('label');
 const labelFieldElements = document.querySelectorAll('.label-field');
 
 let drugHasNoStrength = false;
+let overrideRxNumber = false;
 
 hideForm();
 hideElement(labelElement);
@@ -36,6 +37,18 @@ function formInputHandler(event) {
 
     } else {
       drugHasNoStrength = false;
+    }
+
+    updateFormLayout();
+    updateLabel();
+
+  } else if (eventTarget.name === 'rx-number-override') {
+
+    if (eventTarget.checked === true) {
+      overrideRxNumber = true;
+
+    } else {
+      overrideRxNumber = false;
     }
 
     updateFormLayout();
@@ -94,6 +107,18 @@ function formInputHandler(event) {
           showElement(formControl);
         }
       }
+
+      if (formFieldElement.id === 'rx-number') {
+
+        if (overrideRxNumber) {
+          formFieldElement.required = true;
+          showElement(formControl);
+
+        } else {
+          formFieldElement.required = false;
+          hideElement(formControl);
+        }
+      }
     }
   }
 
@@ -122,6 +147,7 @@ function formInputHandler(event) {
     };
 
     const protocol = getElementValueById('protocol');
+    const rxNumber = getElementValueById('rx-number');
 
     const drug = {
       name: getElementValueById('drug-name'),
@@ -167,6 +193,7 @@ function formInputHandler(event) {
       addressLine2: document.getElementById('label-patient-address-2'),
 
       protocol: document.getElementById('label-protocol'),
+      rxNumber: document.getElementById('label-rx-number'),
 
       drug: document.getElementById('label-drug'),
       manufacturer: document.getElementById('label-drug-manufacturer'),
@@ -188,6 +215,7 @@ function formInputHandler(event) {
     label.addressLine2.textContent = (!patient.address.city && !patient.address.state && !patient.address.zipCode) ? 'Patient address line 2' : `${patient.address.city}${(patient.address.city) ? ', ' : ''} ${patient.address.state} ${patient.address.zipCode}`;
 
     label.protocol.textContent = `Protocol: ${protocol}`;
+    label.rxNumber.textContent = (overrideRxNumber) ? `Rx #${rxNumber}` : 'Rx #';
 
     label.drug.textContent = (!drug.name && !drug.strength && !drug.form) ? 'Medication information' : `${drug.name}${(drug.name && drug.strength) ? ', ' : ''}${drug.strength} ${(labelElement.classList.contains('standard')) ? drug.form : ''}`;
     label.manufacturer.textContent = `Mfr: ${drug.manufacturer}`;
@@ -240,7 +268,10 @@ function prepareLabel() {
     get seconds() { return padLeadingZeros(this.full.getSeconds(), 2) }
   };
 
-  stampRxNumber();
+  if (!overrideRxNumber) {
+    stampRxNumber();
+  }
+
   stampDispensedDatetime();
 
   function stampDispensedDatetime() {
