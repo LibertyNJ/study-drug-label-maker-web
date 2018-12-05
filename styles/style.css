@@ -20,7 +20,7 @@
 }
 
 #label section {
-  margin: .05in .125in;
+  margin: .02in .125in;
 }
 
 #label-dispenser,
@@ -98,6 +98,11 @@
 #label-patient-address-1,
 #label-patient-address-2 {
   text-transform: capitalize;
+}
+
+#label-patient-address-1,
+#label-patient-address-2 {
+  font: 7pt/1.15 sans-serif;
 }
 
 /* State */

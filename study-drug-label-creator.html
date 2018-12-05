@@ -108,13 +108,16 @@
         </fieldset>
       </section>
       <section id="study-and-rx">
-        <h3>Protocol and Rx #</h3>
+        <h3>Study</h3>
         <div class="form-row">
           <div class="form-control standard infusion"><label for="protocol">Protocol</label><input type="text" id="protocol" class="standard infusion" name="protocol" placeholder="D3561C00009…" required></div>
-          <div class="form-control standard infusion"><label for="rx-number">Rx #</label><input type="text" id="rx-number" class="standard infusion" name="rx-numberl" placeholder="20181203112556…" required></div>
+          <div class="form-control standard infusion"><label for="rx-number">Rx #</label><input type="text" id="rx-number" class="standard infusion" name="rx-number" placeholder="20181203112556…" required></div>
         </div>
         <div class="form-row">
           <div class="clickable-form-control standard infusion"><input type="checkbox" name="rx-number-override" id="rx-number-override"><label for="rx-number-override"> I want to enter my own Rx #</label></div>
+        </div>
+        <div class="form-row">
+          <div class="form-control standard infusion"><label for="patient-number">Patient #</label><input type="text" id="patient-number" class="standard infusion" name="patient-number" placeholder="002806…" required></div>
         </div>
       </section>
       <section id="medication">
@@ -180,6 +183,9 @@
             <div class="flex-row">
               <p id="label-protocol" class="label-field standard infusion">Protocol: </p>
               <p id="label-rx-number" class="label-field standard infusion">Rx #</p>
+            </div>
+            <div class="flex-row">
+              <p id="label-patient-number" class="label-field standard infusion">Patient #</p>
             </div>
           </section>
           <section>

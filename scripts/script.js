@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION_NUMBER = 'b3';
+const VERSION_NUMBER = 'b4';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
@@ -148,8 +148,11 @@ function formInputHandler(event) {
       }
     };
 
-    const protocol = getElementValueById('protocol');
-    const rxNumber = getElementValueById('rx-number');
+    const study = {
+      protocol: getElementValueById('protocol'),
+      rxNumber: getElementValueById('rx-number'),
+      patientNumber: getElementValueById('patient-number')
+    };
 
     const drug = {
       name: getElementValueById('drug-name'),
@@ -196,6 +199,7 @@ function formInputHandler(event) {
 
       protocol: document.getElementById('label-protocol'),
       rxNumber: document.getElementById('label-rx-number'),
+      patientNumber: document.getElementById('label-patient-number'),
 
       drug: document.getElementById('label-drug'),
       manufacturer: document.getElementById('label-drug-manufacturer'),
@@ -216,8 +220,9 @@ function formInputHandler(event) {
     label.addressLine1.textContent = (!patient.address.street && !patient.address.apartment) ? 'Patient address line 1' : `${patient.address.street}${(patient.address.apartment) ? ', ' : ''}${patient.address.apartment}`;
     label.addressLine2.textContent = (!patient.address.city && !patient.address.state && !patient.address.zipCode) ? 'Patient address line 2' : `${patient.address.city}${(patient.address.city) ? ', ' : ''} ${patient.address.state} ${patient.address.zipCode}`;
 
-    label.protocol.textContent = `Protocol: ${protocol}`;
-    label.rxNumber.textContent = (overrideRxNumber) ? `Rx #${rxNumber}` : 'Rx #';
+    label.protocol.textContent = `Protocol: ${study.protocol}`;
+    label.rxNumber.textContent = (overrideRxNumber) ? `Rx #${study.rxNumber}` : 'Rx #';
+    label.patientNumber.textContent = `Patient #${study.patientNumber}`;
 
     label.drug.textContent = (!drug.name && !drug.strength && !drug.form) ? 'Medication information' : `${drug.name}${(drug.name && drug.strength) ? ', ' : ''}${drug.strength} ${(labelElement.classList.contains('standard')) ? drug.form : ''}`;
     label.manufacturer.textContent = `Mfr: ${drug.manufacturer}`;
