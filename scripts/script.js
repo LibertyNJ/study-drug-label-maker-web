@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION_NUMBER = 'b4';
+const VERSION_NUMBER = 'b5';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
@@ -20,8 +20,8 @@ hideElement(labelElement);
 formElement.addEventListener('input', (event) => formInputHandler(event));
 formElement.addEventListener('submit', (event) => formSubmitHandler(event));
 
-window.onbeforeprint = preFlight;
-window.onafterprint = postFlight;
+window.addEventListener('beforeprint', (event) => preFlight(event));
+window.addEventListener('afterprint', (event) => postFlight(event));
 
 function formInputHandler(event) {
   const eventTarget = event.target;
