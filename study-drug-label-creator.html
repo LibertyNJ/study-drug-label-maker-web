@@ -148,22 +148,26 @@
         </div>
       </section>
       <section id="prescriber-and-pharmacist">
-        <h3>Prescriber and Pharmacist</h3>
+        <h3>Prescriber and pharmacist</h3>
         <div class="form-row">
           <div class="form-control standard infusion"><label for="prescriber">Prescriber</label><input type="text" id="prescriber" class="standard infusion" name="prescriber" placeholder="Somebody, MD…" required></div>
           <div class="form-control standard infusion"><label for="pharmacist">Pharmacist</label><input type="text" id="pharmacist" class="standard infusion" name="pharmacist" placeholder="Soandso, RPh…" required></div>
         </div>
       </section>
-      <button class="print-button" type="submit">Print label</button>
+      <section id="options-and-print">
+        <h3>Options and print</h3>
+        <div class="form-control standard infusion"><label for="copies">Copies</label><input type="number" id="copies" name="copies" min="1" placeholder="1…" required></div>
+        <button class="print-button" type="submit">Print label</button>
+      </section>
     </form>
   </section>
   <section id="label-preview">
     <h2>Label preview</h2>
-    <article id="label">
+    <article class="label">
       <div class="label-body">
         <div class="upper-half">
           <header>
-            <p id="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
+            <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
             <div class="flex-row">
               <p>300 Community Drive <br>
                 Manhasset, NY 11030</p>
@@ -173,50 +177,49 @@
           </header>
           <section>
             <div class="flex-row">
-              <p id="label-patient-name" class="label-field standard infusion">Patient name</p>
-              <p id="label-patient-dob" class="label-field standard infusion">DoB: </p>
+              <p class="label-patient-name label-field standard infusion">Patient name</p>
+              <p class="label-patient-dob label-field standard infusion">DoB: </p>
             </div>
-            <p id="label-patient-address-1" class="label-field standard infusion">Patient address line 1</p>
-            <p id="label-patient-address-2" class="standard infusion">Patient address line 2</p>
+            <p class="label-patient-address-1 label-field standard infusion">Patient address line 1</p>
+            <p class="label-patient-address-2 standard infusion">Patient address line 2</p>
           </section>
           <section>
             <div class="flex-row">
-              <p id="label-protocol" class="label-field standard infusion">Protocol: </p>
-              <p id="label-rx-number" class="label-field standard infusion">Rx #</p>
+              <p class="label-protocol label-field standard infusion">Protocol: </p>
+              <p class="label-rx-number label-field standard infusion">Rx #</p>
             </div>
             <div class="flex-row">
-              <p id="label-patient-number" class="label-field standard infusion">Patient #</p>
-            </div>
-          </section>
-          <section>
-            <div class="flex-row">
-              <p id="label-drug" class="label-field standard infusion">Medication information</p>
-              <p id="label-drug-manufacturer" class="label-field standard infusion">Mfr: </p>
-            </div>
-            <p id="label-drug-quantity" class="label-field standard">Qty: </p>
-            <p id="label-sig" class="label-field standard">Sig</p>
-            <p id="label-drug-diluent" class="label-field infusion">Diluent information</p>
-            <p id="label-drug-rate" class="label-field infusion">Rate: </p>
-            <div class="flex-row">
-              <p id="label-preparation-datetime" class="label-field infusion">Prep: </p>
-              <p id="label-expiration-datetime" class="label-field infusion">Exp: </p>
+              <p class="label-patient-number label-field standard infusion">Patient #</p>
             </div>
           </section>
           <section>
             <div class="flex-row">
-              <p id="label-prescriber" class="label-field standard infusion">Prescriber: </p>
-              <p id="label-pharmacist" class="label-field standard infusion">Pharmacist: </p>
+              <p class="label-drug label-field standard infusion">Medication information</p>
+              <p class="label-drug-manufacturer label-field standard infusion">Mfr: </p>
+            </div>
+            <p class="label-drug-quantity label-field standard">Qty: </p>
+            <p class="label-sig label-field standard">Sig</p>
+            <p class="label-drug-diluent label-field infusion">Diluent information</p>
+            <p class="label-drug-rate label-field infusion">Rate: </p>
+            <div class="flex-row">
+              <p class="label-preparation-datetime label-field infusion">Prep: </p>
+              <p class="label-expiration-datetime label-field infusion">Exp: </p>
+            </div>
+          </section>
+          <section>
+            <div class="flex-row">
+              <p class="label-prescriber label-field standard infusion">Prescriber: </p>
+              <p class="label-pharmacist label-field standard infusion">Pharmacist: </p>
             </div>
           </section>
         </div>
         <div class="lower-half">
           <footer>
             <div class="flex-row">
-              <p id="label-dispenser" class="label-field standard infusion">Dispensed by: </p>
-              <p id="label-receiver" class="label-field standard infusion">Received by: </p>
+              <p class="label-dispenser label-field standard infusion">Dispensed by: </p>
+              <p class="label-receiver label-field standard infusion">Received by: </p>
             </div>
-            <p id="label-dispensed-datetime" class="label-field standard infusion">Date and time: </p>
-          </footer>
+            <p class="label-dispensed-datetime label-field standard infusion">Date and time: </p>
         </div>
       </div>
     </article>

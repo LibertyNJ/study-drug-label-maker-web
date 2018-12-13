@@ -8,34 +8,34 @@
 
 /* Layout */
 
-#label footer {
+.label footer {
   border-top: 1px solid black;
   font: 7pt/1.15 sans-serif;
   margin: .05in .125in 0 .125in;
 }
-#label header {
+.label header {
   border-bottom: 1px solid black;
   font: 7pt/1.15 sans-serif;
   margin: 0 .125in .05in .125in;
 }
 
-#label section {
+.label section {
   margin: .02in .125in;
 }
 
-#label-dispenser,
-#label-receiver {
+.label-dispenser,
+.label-receiver {
   margin: .05in 0;
   width: 50%;
 }
 
-#label.standard {
+.label.standard {
   display: flex;
   height: 2in;
   width: 3.625in;
 }
 
-#label.standard>.label-body {
+.label.standard>.label-body {
   height: 1.9375in;
   margin: auto;
   overflow: hidden;
@@ -43,13 +43,13 @@
   width: 3.5in;
 }
 
-#label.infusion {
+.label.infusion {
   display: flex;
   height: 5.125in;
   width: 3.125in;
 }
 
-#label.infusion>.label-body {
+.label.infusion>.label-body {
   height: 5in;
   margin: auto;
   overflow: hidden;
@@ -57,12 +57,12 @@
   width: 3in;
 }
 
-#label.infusion .lower-half {
+.label.infusion .lower-half {
   height: 1.9375in;
   margin-top: .0625in;
 }
 
-#label.infusion .upper-half {
+.label.infusion .upper-half {
   height: 3in;
   margin-bottom: .0625in;
 }
@@ -74,34 +74,34 @@
   justify-content: space-between;
 }
 
-#label {
+.label {
   color: black;
   font: 8pt/1.125 sans-serif;
   margin: 0 auto;
 }
 
-#label-drug,
-#label-drug-diluent,
-#label-drug-rate,
-#label-expiration-datetime,
-#label-hospital-name,
-#label-sig,
-#label-patient-name {
+.label-drug,
+.label-drug-diluent,
+.label-drug-rate,
+.label-expiration-datetime,
+.label-hospital-name,
+.label-sig,
+.label-patient-name {
   font-weight: bold;
 }
 
-#label-hospital-name {
+.label-hospital-name {
   text-align: center;
 }
 
-#label-patient-name,
-#label-patient-address-1,
-#label-patient-address-2 {
+.label-patient-name,
+.label-patient-address-1,
+.label-patient-address-2 {
   text-transform: capitalize;
 }
 
-#label-patient-address-1,
-#label-patient-address-2 {
+.label-patient-address-1,
+.label-patient-address-2 {
   font: 7pt/1.15 sans-serif;
 }
 
@@ -318,6 +318,10 @@
     margin: 0 calc( .5 * var(--vertical-rhythm) );
   }
 
+  #copies {
+    width: 3em;
+  }
+
   #drug-diluent-volume,
   #drug-form,
   #drug-strength {
@@ -348,33 +352,33 @@
     background: linear-gradient(var(--northwell-dark-blue), var(--northwell-light-blue));
     border: 1px inset var(--northwell-light-blue);
   }
-  #label.standard {
+  .label.standard {
     background: gray;
     border: 1px solid black;
   }
 
-  #label.standard>.label-body {
+  .label.standard>.label-body {
     background: white;
     border: 1px solid black;
     border-radius: .125in;
   }
 
-  #label.infusion {
+  .label.infusion {
     background: gray;
     border: 1px solid black;
   }
 
-  #label.infusion>.label-body {
+  .label.infusion>.label-body {
     background: yellow;
     border: 1px solid black;
     border-radius: .125in;
   }
 
-  #label.infusion .upper-half {
+  .label.infusion .upper-half {
     border-bottom: 1px dashed gray;
   }
 
-  #label.infusion .lower-half {
+  .label.infusion .lower-half {
     border-top: 1px dotted gray;
   }
 

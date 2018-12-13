@@ -1,16 +1,15 @@
 'use strict';
 
-const VERSION_NUMBER = 'b5';
+const VERSION_NUMBER = 'b6';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
 const formElement = document.getElementsByTagName('form')[0];
 const formControlElements = document.querySelectorAll('.form-control');
 
-const labelElement = document.getElementById('label');
+const labelElement = document.querySelector('.label');
 const labelFieldElements = document.querySelectorAll('.label-field');
 
-let completedPrinting = true;
 let drugHasNoStrength = false;
 let overrideRxNumber = false;
 
@@ -192,27 +191,27 @@ function formInputHandler(event) {
     const pharmacist = getElementValueById('pharmacist');
 
     const label = {
-      name: document.getElementById('label-patient-name'),
-      dob: document.getElementById('label-patient-dob'),
-      addressLine1: document.getElementById('label-patient-address-1'),
-      addressLine2: document.getElementById('label-patient-address-2'),
+      name: document.querySelector('.label-patient-name'),
+      dob: document.querySelector('.label-patient-dob'),
+      addressLine1: document.querySelector('.label-patient-address-1'),
+      addressLine2: document.querySelector('.label-patient-address-2'),
 
-      protocol: document.getElementById('label-protocol'),
-      rxNumber: document.getElementById('label-rx-number'),
-      patientNumber: document.getElementById('label-patient-number'),
+      protocol: document.querySelector('.label-protocol'),
+      rxNumber: document.querySelector('.label-rx-number'),
+      patientNumber: document.querySelector('.label-patient-number'),
 
-      drug: document.getElementById('label-drug'),
-      manufacturer: document.getElementById('label-drug-manufacturer'),
-      quantity: document.getElementById('label-drug-quantity'),
-      sig: document.getElementById('label-sig'),
-      diluent: document.getElementById('label-drug-diluent'),
-      rate: document.getElementById('label-drug-rate'),
+      drug: document.querySelector('.label-drug'),
+      manufacturer: document.querySelector('.label-drug-manufacturer'),
+      quantity: document.querySelector('.label-drug-quantity'),
+      sig: document.querySelector('.label-sig'),
+      diluent: document.querySelector('.label-drug-diluent'),
+      rate: document.querySelector('.label-drug-rate'),
 
-      expiration: document.getElementById('label-expiration-datetime'),
-      preparation: document.getElementById('label-preparation-datetime'),
+      expiration: document.querySelector('.label-expiration-datetime'),
+      preparation: document.querySelector('.label-preparation-datetime'),
 
-      prescriber: document.getElementById('label-prescriber'),
-      pharmacist: document.getElementById('label-pharmacist')
+      prescriber: document.querySelector('.label-prescriber'),
+      pharmacist: document.querySelector('.label-pharmacist')
     };
 
     label.name.textContent = (!patient.name.last && !patient.name.first && !patient.name.middleInitial) ? 'Patient name' : `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
@@ -265,12 +264,13 @@ function padLeadingZeros(number, zeros) {
 }
 
 function postFlight() {
-  completedPrinting = window.confirm(`Are you sure that you printed all the labels you need? If you leave the print window and reprint the label, the Rx # will change!
+  removePrintCopies();
 
-Press "OK" to continue, or "Cancel" to go back to the print window.`);
-
-  if (!completedPrinting) {
-    setTimeout(window.print, 50); //setTimeout() fixes an issue where reprinting immediately attempts to print a blank document. I suspect this is probably due to the confirmation window being considered the active window.
+  function removePrintCopies() {
+    const printCopies = document.querySelectorAll('.print-copy');
+    for (let printCopy of printCopies) {
+      printCopy.remove();
+    }
   }
 }
 
@@ -285,19 +285,38 @@ function preFlight() {
     get seconds() { return padLeadingZeros(this.full.getSeconds(), 2) }
   };
 
-  if (!overrideRxNumber && completedPrinting) {
-    stampRxNumber();
+  if (!overrideRxNumber) stampRxNumber();
+  stampDispensedDatetime();
+  createPrintCopies();
+
+  function createPrintCopies() {
+    const labelPreviewElement = document.getElementById('label-preview');
+
+    let copiesToPrint = +getElementValueById('copies');
+
+    while (copiesToPrint > 1) {
+      let newPrintCopy = document.createElement('article');
+      newPrintCopy.classList.add('print-copy');
+
+      for (let item of labelElement.classList) {
+        newPrintCopy.classList.add(item);
+      }
+
+      newPrintCopy.innerHTML = labelElement.innerHTML;
+
+      labelPreviewElement.append(newPrintCopy);
+
+      copiesToPrint--;
+    }
   }
 
-  stampDispensedDatetime();
-
   function stampDispensedDatetime() {
-    const labelDispensedDatetime = document.getElementById('label-dispensed-datetime');
+    const labelDispensedDatetime = document.querySelector('.label-dispensed-datetime');
     labelDispensedDatetime.textContent = `Date and time: ${now.month}/${now.date}/${now.year} ${now.hours}:${now.minutes}`;
   }
 
   function stampRxNumber() {
-    const labelRxNumber = document.getElementById('label-rx-number');
+    const labelRxNumber = document.querySelector('.label-rx-number');
     labelRxNumber.textContent = `Rx #${now.year}${now.month}${now.date}${now.hours}${now.minutes}${now.seconds}`;
   }
 }
