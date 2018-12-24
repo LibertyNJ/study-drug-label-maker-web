@@ -1,0 +1,435 @@
+@import 'fonts';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+  
+.label {
+  color: black;
+  font: 8pt/1.125 sans-serif;
+  margin: 0 auto;
+  
+  footer {
+    border-top: 1px solid black;
+    font: 7pt/1.15 sans-serif;
+    margin: .05in .125in 0 .125in;
+  }
+
+  header {
+    border-bottom: 1px solid black;
+    font: 7pt/1.15 sans-serif;
+    margin: 0 .125in .05in .125in;
+  }
+
+  section {
+    margin: .02in .125in;
+  }
+
+  &-dispenser,
+  &-receiver {
+    margin: .05in 0;
+    width: 50%;
+  }
+
+  &.standard {
+    display: flex;
+    height: 2in;
+    width: 3.625in;
+  }
+
+  &.standard>&-body {
+    height: 1.9375in;
+    margin: auto;
+    overflow: hidden;
+    padding: .0625in 0;
+    width: 3.5in;
+  }
+  
+  &.infusion {
+    display: flex;
+    height: 5.125in;
+    width: 3.125in;
+
+    .lower-half {
+      height: 1.9375in;
+      margin-top: .0625in;
+    }
+
+    .upper-half {
+      height: 3in;
+      margin-bottom: .0625in;
+    }
+  }
+  
+  &.infusion>&-body {
+    height: 5in;
+    margin: auto;
+    overflow: hidden;
+    padding: .0625in 0;
+    width: 3in;
+  }
+  
+  &-drug,
+  &-drug-diluent,
+  &-drug-rate,
+  &-expiration-datetime,
+  &-hospital-name,
+  &-sig,
+  &-patient-name {
+    font-weight: bold;
+  }
+  
+  &-hospital-name {
+    text-align: center;
+  }
+  
+  &-patient-name,
+  &-patient-address-1,
+  &-patient-address-2 {
+    text-transform: capitalize;
+  }
+  
+  &-patient-address-1,
+  &-patient-address-2 {
+    font: 7pt/1.15 sans-serif;
+  }
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+  @media screen {
+    $northwell-dark-blue: rgb(0, 60, 165);
+    $northwell-gray: rgb(83, 86, 90);
+    $northwell-green: rgb(61, 173, 44);
+    $northwell-light-blue: rgb(0, 154, 223);
+    $northwell-purple: rgb(92, 11, 138);
+    $vertical-rhythm: 1.4rem;
+
+  a {
+    &:link {
+      color: $northwell-dark-blue;
+    }
+  
+    &:visited {
+      color: $northwell-purple;
+    }
+  
+    &:hover {
+      color: $northwell-light-blue;
+    }
+  
+    &:active {
+      color: $northwell-purple;
+    }
+  }
+
+  address {
+    color: white;
+    font: 1rem/1.4 'Montserrat', sans-serif;
+    margin: (.5 * $vertical-rhythm) $vertical-rhythm;
+    text-align: right;
+  }
+
+  button {
+    color: $northwell-gray;
+    font: bold 1rem/1.4 'Montserrat', sans-serif;
+    margin: 0 auto;
+    padding: (.5 * $vertical-rhythm);
+  }
+
+  datalist {
+    position: absolute;
+  }
+
+  fieldset {
+    padding: (.5 * $vertical-rhythm);
+    margin-bottom: $vertical-rhythm;
+    width: max-content;
+  }
+
+  html {
+    color: $northwell-gray;
+    font-size: 112.5%;
+  }
+
+  h1 {
+    color: $northwell-dark-blue;
+    font: bold 2.058rem/1.4 'Montserrat', sans-serif;
+    margin: auto auto;
+    text-align: center;
+  }
+
+  h2 {
+    color: $northwell-dark-blue;
+    font: 1.825rem/1.75 'Montserrat', sans-serif;
+  }
+
+  h3 {
+    color: $northwell-gray;
+    font: 1.618rem/1.75 'Montserrat', sans-serif;
+  }
+
+  input,
+  textarea {
+    font: 1rem/1.4 'Montserrat', sans-serif;
+    margin-bottom: (.5 * $vertical-rhythm);
+    padding: 0 .25em;
+  }
+
+  select {
+    font: 1rem/1.4 'Montserrat', sans-serif;
+    margin-bottom: (.5 * $vertical-rhythm);
+    padding: .2em .25em;
+  }
+
+  label {
+    font: italic 1rem/1.4 'Montserrat', sans-serif;
+  }
+
+  legend {
+    color: $northwell-light-blue;
+    font: 1.128rem/1.3 'Montserrat', sans-serif;
+  }
+
+  li {
+    margin-left: 1em;
+  }
+
+  nav {
+    a {
+      &:visited {
+        color: $northwell-dark-blue;
+      }
+    
+      &:hover {
+        color: $northwell-light-blue;
+      }
+    
+      &:active {
+        color: $northwell-purple;
+      }
+    }
+
+    ul {
+      list-style: none;
+    }
+  }
+
+  .help {
+    ol,
+    p,
+    ul {
+      font: 1rem/1.4 'Montserrat', sans-serif;
+      margin-bottom: $vertical-rhythm;
+      max-width: 33em;
+    }
+  }
+
+  body {
+    display: grid;
+    gap: $vertical-rhythm;
+    grid: "header header header  header" auto
+          ".      form   preview .     " auto
+          ".      form   .       .     " 1fr
+          "footer footer footer  footer" auto
+      / $vertical-rhythm 2fr 1fr $vertical-rhythm;
+    min-height: 100vh;
+
+    &>footer {
+      align-items: center;
+      align-self: end;
+      background: $northwell-gray;
+      display: flex;
+      grid-area: footer;
+      height: (3 * $vertical-rhythm);
+      justify-content: space-between;
+    }
+  
+    &>header {
+      grid-area: header;
+      height: (2 * $vertical-rhythm);
+    }
+  
+    &.help {
+      display: grid;
+      gap: $vertical-rhythm;
+      grid: "header header header  header" auto
+            ".      aside  main    .     " auto
+            ".      .      main    .     " 1fr
+            "footer footer footer  footer" auto
+        / $vertical-rhythm 1fr 2fr $vertical-rhythm;
+      min-height: 100vh;
+    }
+  
+    &.help>main {
+      grid-area: main;
+    }
+  
+    &.help>aside {
+      grid-area: aside;
+      position: sticky;
+      top: 0;
+    }
+  }
+
+  #label {
+    &-information {
+      grid-area: form;
+    }
+
+    &-preview {
+      grid-area: preview;
+      height: auto;
+      position: sticky;
+      top: 0;
+      z-index: -1;
+    }
+  }
+
+  .form {
+    &-control {
+      display: inline-block;
+      margin: 0 (.5 * $vertical-rhythm);
+    }
+  
+    &-control>label {
+      display: block;
+    }
+  
+    &-row {
+      display: flex;
+      justify-content: start;
+    }
+  }
+
+  .clickable-form-control {
+    display: inline-block;
+    margin: 0 (.5 * $vertical-rhythm);
+  }
+
+  #copies {
+    width: 3em;
+  }
+
+  #drug-diluent-volume,
+  #drug-form,
+  #drug-strength {
+    width: 7em;
+  }
+
+  #drug-no-strength,
+  #rx-number-override {
+    margin-left: 14em;
+  }
+
+  #help {
+    float: right;
+    margin-right: (2 * $vertical-rhythm);
+
+    button {
+      background: linear-gradient($northwell-light-blue, $northwell-dark-blue);
+      border: 1px outset $northwell-light-blue;
+      color: white;
+
+      &:hover {
+        border: 1px inset $northwell-dark-blue;
+      }
+    
+      &:active {
+        background: linear-gradient($northwell-dark-blue, $northwell-light-blue);
+        border: 1px inset $northwell-light-blue;
+      }
+    }
+  }
+
+  .label {
+    &.standard {
+      background: gray;
+      border: 1px solid black;
+
+      &>.label-body {
+        background: white;
+        border: 1px solid black;
+        border-radius: .125in;
+      }
+    }
+  
+    &.infusion {
+      background: gray;
+      border: 1px solid black;
+
+      &>.label-body {
+        background: yellow;
+        border: 1px solid black;
+        border-radius: .125in;
+      }
+    
+       .upper-half {
+        border-bottom: 1px dashed gray;
+      }
+    
+       .lower-half {
+        border-top: 1px dotted gray;
+      }
+    }
+  }
+
+  #logo {
+    display: block;
+    height: (2 * $vertical-rhythm);
+    margin-left: $vertical-rhythm;
+  }
+
+  label[for="patient-dob"] {
+    margin-top: (1.5 * $vertical-rhythm);
+  }
+
+  #patient {
+    &-middle-initial {
+      width: 2em;
+    }
+  
+    &-state {
+      width: 4em;
+    }
+  
+    &-zip-code {
+      width: 7em;
+    }
+  }
+
+  #sig {
+    height: (2 * $vertical-rhythm);
+    width: 16em;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+@media print {
+  h2,
+  body>header,
+  body>footer,
+  #label-information {
+    display: none;
+  }
+    
+  .label {
+    page-break-after: always;
+  }
+    
+  @page {
+    margin: 0;
+  }
+}

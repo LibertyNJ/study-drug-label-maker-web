@@ -7,9 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Study Drug Label Creator</title>
   <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
-  <link href="styles/fonts.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
-  <link href="styles/label-print.css" rel="stylesheet" media="print">
 </head>
 
 <body>
@@ -19,7 +17,7 @@
   </header>
   <section id="label-information">
     <h2>Label information</h2>
-    <form>
+    <form action="write-to-database.py" method="POST">
       <fieldset>
         <legend>Label type</legend>
         <div class="form-row">
@@ -95,8 +93,8 @@
                 <option value="TN">TN</option>
                 <option value="TX">TX</option>
                 <option value="UT">UT</option>
-                <option value="VT">VT</option>
                 <option value="VA">VA</option>
+                <option value="VT">VT</option>
                 <option value="WA">WA</option>
                 <option value="WI">WI</option>
                 <option value="WV">WV</option>

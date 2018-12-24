@@ -241,6 +241,7 @@ function formInputHandler(event) {
 function formSubmitHandler(event) {
   event.preventDefault();
   window.print();
+  sendDataToDatabaseHandler();
 }
 
 function getElementValueById(fieldId) {
