@@ -5,7 +5,7 @@ const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
 const formElement = document.getElementsByTagName('form')[0];
-const formControlElements = document.querySelectorAll('.form-control');
+const formControlElements = document.querySelectorAll('.form__control');
 
 const labelElement = document.querySelector('.label');
 const labelFieldElements = document.querySelectorAll('.label-field');
@@ -191,27 +191,27 @@ function formInputHandler(event) {
     const pharmacist = getElementValueById('pharmacist');
 
     const label = {
-      name: document.querySelector('.label-patient-name'),
-      dob: document.querySelector('.label-patient-dob'),
-      addressLine1: document.querySelector('.label-patient-address-1'),
-      addressLine2: document.querySelector('.label-patient-address-2'),
+      name: document.querySelector('.label__patient-name'),
+      dob: document.querySelector('.label__patient-dob'),
+      addressLine1: document.querySelector('.label__patient-address-1'),
+      addressLine2: document.querySelector('.label__patient-address-2'),
 
-      protocol: document.querySelector('.label-protocol'),
-      rxNumber: document.querySelector('.label-rx-number'),
-      patientNumber: document.querySelector('.label-patient-number'),
+      protocol: document.querySelector('.label__protocol'),
+      rxNumber: document.querySelector('.label__rx-number'),
+      patientNumber: document.querySelector('.label__patient-number'),
 
-      drug: document.querySelector('.label-drug'),
-      manufacturer: document.querySelector('.label-drug-manufacturer'),
-      quantity: document.querySelector('.label-drug-quantity'),
-      sig: document.querySelector('.label-sig'),
-      diluent: document.querySelector('.label-drug-diluent'),
-      rate: document.querySelector('.label-drug-rate'),
+      drug: document.querySelector('.label__drug'),
+      manufacturer: document.querySelector('.label__drug-manufacturer'),
+      quantity: document.querySelector('.label__drug-quantity'),
+      sig: document.querySelector('.label__sig'),
+      diluent: document.querySelector('.label__drug-diluent'),
+      rate: document.querySelector('.label__drug-rate'),
 
-      expiration: document.querySelector('.label-expiration-datetime'),
-      preparation: document.querySelector('.label-preparation-datetime'),
+      expiration: document.querySelector('.label__expiration-datetime'),
+      preparation: document.querySelector('.label__preparation-datetime'),
 
-      prescriber: document.querySelector('.label-prescriber'),
-      pharmacist: document.querySelector('.label-pharmacist')
+      prescriber: document.querySelector('.label__prescriber'),
+      pharmacist: document.querySelector('.label__pharmacist')
     };
 
     label.name.textContent = (!patient.name.last && !patient.name.first && !patient.name.middleInitial) ? 'Patient name' : `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
@@ -312,12 +312,12 @@ function preFlight() {
   }
 
   function stampDispensedDatetime() {
-    const labelDispensedDatetime = document.querySelector('.label-dispensed-datetime');
+    const labelDispensedDatetime = document.querySelector('.label__dispensed-datetime');
     labelDispensedDatetime.textContent = `Date and time: ${now.month}/${now.date}/${now.year} ${now.hours}:${now.minutes}`;
   }
 
   function stampRxNumber() {
-    const labelRxNumber = document.querySelector('.label-rx-number');
+    const labelRxNumber = document.querySelector('.label__rx-number');
     labelRxNumber.textContent = `Rx #${now.year}${now.month}${now.date}${now.hours}${now.minutes}${now.seconds}`;
   }
 }

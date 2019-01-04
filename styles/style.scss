@@ -1,11 +1,11 @@
-@import 'fonts';
+@import 'config', 'fonts';
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-  
+
 .label {
   color: black;
   font: 8pt/1.125 sans-serif;
@@ -27,79 +27,81 @@
     margin: .02in .125in;
   }
 
-  &-dispenser,
-  &-receiver {
+  &__dispenser,
+  &__receiver {
     margin: .05in 0;
     width: 50%;
   }
 
+  &__drug,
+  &__drug-diluent,
+  &__drug-rate,
+  &__expiration-datetime,
+  &__hospital-name,
+  &__sig,
+  &__patient-name {
+    font-weight: bold;
+  }
+  
+  &__hospital-name {
+    text-align: center;
+  }
+  
+  &__patient-address-1,
+  &__patient-address-2 {
+    font: 7pt/1.15 sans-serif;
+  }
+
+  &__patient-address-1,
+  &__patient-address-2,
+  &__patient-name {
+    text-transform: capitalize;
+  }
+  
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
   &.standard {
     display: flex;
     height: 2in;
     width: 3.625in;
+
+    & .label__body {
+      height: 1.9375in;
+      margin: auto;
+      overflow: hidden;
+      padding: .0625in 0;
+      width: 3.5in;
+    }
   }
 
-  &.standard>&-body {
-    height: 1.9375in;
-    margin: auto;
-    overflow: hidden;
-    padding: .0625in 0;
-    width: 3.5in;
-  }
-  
   &.infusion {
     display: flex;
     height: 5.125in;
     width: 3.125in;
 
-    .lower-half {
-      height: 1.9375in;
-      margin-top: .0625in;
-    }
+    .label {
+      &__body {
+        height: 5in;
+        margin: auto;
+        overflow: hidden;
+        padding: .0625in 0;
+        width: 3in;
+      }
 
-    .upper-half {
-      height: 3in;
-      margin-bottom: .0625in;
+      &__lower-half {
+        height: 1.9375in;
+        margin-top: .0625in;
+      }
+  
+      &__upper-half {
+        height: 3in;
+        margin-bottom: .0625in;
+      }
     }
   }
-  
-  &.infusion>&-body {
-    height: 5in;
-    margin: auto;
-    overflow: hidden;
-    padding: .0625in 0;
-    width: 3in;
-  }
-  
-  &-drug,
-  &-drug-diluent,
-  &-drug-rate,
-  &-expiration-datetime,
-  &-hospital-name,
-  &-sig,
-  &-patient-name {
-    font-weight: bold;
-  }
-  
-  &-hospital-name {
-    text-align: center;
-  }
-  
-  &-patient-name,
-  &-patient-address-1,
-  &-patient-address-2 {
-    text-transform: capitalize;
-  }
-  
-  &-patient-address-1,
-  &-patient-address-2 {
-    font: 7pt/1.15 sans-serif;
-  }
-}
-
-.flex-row {
-  display: flex;
-  justify-content: space-between;
 }
 
 .hidden {
@@ -107,47 +109,36 @@
 }
 
   @media screen {
-    $northwell-dark-blue: rgb(0, 60, 165);
-    $northwell-gray: rgb(83, 86, 90);
-    $northwell-green: rgb(61, 173, 44);
-    $northwell-light-blue: rgb(0, 154, 223);
-    $northwell-purple: rgb(92, 11, 138);
-    $vertical-rhythm: 1.4rem;
-
   a {
     &:link {
-      color: $northwell-dark-blue;
+      color: $color-text-link;
     }
   
     &:visited {
-      color: $northwell-purple;
+      color: $color-text-link-visited;
     }
   
     &:hover {
-      color: $northwell-light-blue;
+      color: $color-text-link-hover;
     }
   
     &:active {
-      color: $northwell-purple;
+      color: $color-text-link-visited;
     }
   }
 
   address {
-    color: white;
+    color: $color-text-invert;
     font: 1rem/1.4 'Montserrat', sans-serif;
     margin: (.5 * $vertical-rhythm) $vertical-rhythm;
     text-align: right;
   }
 
   button {
-    color: $northwell-gray;
+    color: $color-text;
     font: bold 1rem/1.4 'Montserrat', sans-serif;
     margin: 0 auto;
     padding: (.5 * $vertical-rhythm);
-  }
-
-  datalist {
-    position: absolute;
   }
 
   fieldset {
@@ -157,25 +148,25 @@
   }
 
   html {
-    color: $northwell-gray;
+    color: $color-text;
     font-size: 112.5%;
   }
 
   h1 {
-    color: $northwell-dark-blue;
-    font: bold 2.058rem/1.4 'Montserrat', sans-serif;
+    color: $color-text-heading;
+    font: bold 2rem/1.4 'Montserrat', sans-serif;
     margin: auto auto;
     text-align: center;
   }
 
   h2 {
-    color: $northwell-dark-blue;
-    font: 1.825rem/1.75 'Montserrat', sans-serif;
+    color: $color-text-heading;
+    font: bold 1.5rem/1.866 'Montserrat', sans-serif;
   }
 
   h3 {
-    color: $northwell-gray;
-    font: 1.618rem/1.75 'Montserrat', sans-serif;
+    color: $color-text;
+    font: bold 1rem/1.4 'Montserrat', sans-serif;
   }
 
   input,
@@ -192,12 +183,12 @@
   }
 
   label {
-    font: italic 1rem/1.4 'Montserrat', sans-serif;
+    font: 1rem/1.4 'Montserrat', sans-serif;
   }
 
   legend {
-    color: $northwell-light-blue;
-    font: 1.128rem/1.3 'Montserrat', sans-serif;
+    color: $color-accent;
+    font: 1rem/1.3 'Montserrat', sans-serif;
   }
 
   li {
@@ -207,15 +198,15 @@
   nav {
     a {
       &:visited {
-        color: $northwell-dark-blue;
+        color: $color-text-link-visited;
       }
     
       &:hover {
-        color: $northwell-light-blue;
+        color: $color-text-link-hover;
       }
     
       &:active {
-        color: $northwell-purple;
+        color: $color-text-link-visited;
       }
     }
 
@@ -247,7 +238,7 @@
     &>footer {
       align-items: center;
       align-self: end;
-      background: $northwell-gray;
+      background: $color-background-invert;
       display: flex;
       grid-area: footer;
       height: (3 * $vertical-rhythm);
@@ -268,16 +259,16 @@
             "footer footer footer  footer" auto
         / $vertical-rhythm 1fr 2fr $vertical-rhythm;
       min-height: 100vh;
-    }
-  
-    &.help>main {
-      grid-area: main;
-    }
-  
-    &.help>aside {
-      grid-area: aside;
-      position: sticky;
-      top: 0;
+
+      &>main {
+        grid-area: main;
+      }
+    
+      &>aside {
+        grid-area: aside;
+        position: sticky;
+        top: 0;
+      }
     }
   }
 
@@ -296,25 +287,27 @@
   }
 
   .form {
-    &-control {
+    &__control {
+      display: inline-block;
+      margin: 0 (.5 * $vertical-rhythm);
+
+      &>label {
+        display: block;
+      }
+    }
+
+    &__control-toggle {
       display: inline-block;
       margin: 0 (.5 * $vertical-rhythm);
     }
   
-    &-control>label {
-      display: block;
-    }
-  
-    &-row {
+    &__row {
       display: flex;
       justify-content: start;
     }
   }
 
-  .clickable-form-control {
-    display: inline-block;
-    margin: 0 (.5 * $vertical-rhythm);
-  }
+
 
   #copies {
     width: 3em;
@@ -336,17 +329,17 @@
     margin-right: (2 * $vertical-rhythm);
 
     button {
-      background: linear-gradient($northwell-light-blue, $northwell-dark-blue);
-      border: 1px outset $northwell-light-blue;
-      color: white;
+      background: linear-gradient($color-accent, $color-primary);
+      border: 1px outset $color-accent;
+      color: $color-text-invert;
 
       &:hover {
-        border: 1px inset $northwell-dark-blue;
+        border: 1px inset $color-primary;
       }
     
       &:active {
-        background: linear-gradient($northwell-dark-blue, $northwell-light-blue);
-        border: 1px inset $northwell-light-blue;
+        background: linear-gradient($color-primary, $color-accent);
+        border: 1px inset $color-accent;
       }
     }
   }
@@ -356,7 +349,7 @@
       background: gray;
       border: 1px solid black;
 
-      &>.label-body {
+      &>.label__body {
         background: white;
         border: 1px solid black;
         border-radius: .125in;
@@ -367,17 +360,17 @@
       background: gray;
       border: 1px solid black;
 
-      &>.label-body {
+      &>.label__body {
         background: yellow;
         border: 1px solid black;
         border-radius: .125in;
       }
     
-       .upper-half {
+       .label__upper-half {
         border-bottom: 1px dashed gray;
       }
     
-       .lower-half {
+       .label__lower-half {
         border-top: 1px dotted gray;
       }
     }
