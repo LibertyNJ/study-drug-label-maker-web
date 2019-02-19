@@ -10,7 +10,7 @@
   color: black;
   font: 8pt/1.125 sans-serif;
   margin: 0 auto;
-  
+
   footer {
     border-top: 1px solid black;
     font: 7pt/1.15 sans-serif;
@@ -42,11 +42,11 @@
   &__patient-name {
     font-weight: bold;
   }
-  
+
   &__hospital-name {
     text-align: center;
   }
-  
+
   &__patient-address-1,
   &__patient-address-2 {
     font: 7pt/1.15 sans-serif;
@@ -57,12 +57,12 @@
   &__patient-name {
     text-transform: capitalize;
   }
-  
+
   &__row {
     display: flex;
     justify-content: space-between;
   }
-  
+
   &.standard {
     display: flex;
     height: 2in;
@@ -95,7 +95,7 @@
         height: 1.9375in;
         margin-top: .0625in;
       }
-  
+
       &__upper-half {
         height: 3in;
         margin-bottom: .0625in;
@@ -113,15 +113,15 @@
     &:link {
       color: $color-text-link;
     }
-  
+
     &:visited {
       color: $color-text-link-visited;
     }
-  
+
     &:hover {
       color: $color-text-link-hover;
     }
-  
+
     &:active {
       color: $color-text-link-visited;
     }
@@ -200,11 +200,11 @@
       &:visited {
         color: $color-text-link-visited;
       }
-    
+
       &:hover {
         color: $color-text-link-hover;
       }
-    
+
       &:active {
         color: $color-text-link-visited;
       }
@@ -244,12 +244,12 @@
       height: (3 * $vertical-rhythm);
       justify-content: space-between;
     }
-  
+
     &>header {
       grid-area: header;
       height: (2 * $vertical-rhythm);
     }
-  
+
     &.help {
       display: grid;
       gap: $vertical-rhythm;
@@ -263,7 +263,7 @@
       &>main {
         grid-area: main;
       }
-    
+
       &>aside {
         grid-area: aside;
         position: sticky;
@@ -300,7 +300,7 @@
       display: inline-block;
       margin: 0 (.5 * $vertical-rhythm);
     }
-  
+
     &__row {
       display: flex;
       justify-content: start;
@@ -336,7 +336,7 @@
       &:hover {
         border: 1px inset $color-primary;
       }
-    
+
       &:active {
         background: linear-gradient($color-primary, $color-accent);
         border: 1px inset $color-accent;
@@ -355,7 +355,7 @@
         border-radius: .125in;
       }
     }
-  
+
     &.infusion {
       background: gray;
       border: 1px solid black;
@@ -365,11 +365,11 @@
         border: 1px solid black;
         border-radius: .125in;
       }
-    
+
        .label__upper-half {
         border-bottom: 1px dashed gray;
       }
-    
+
        .label__lower-half {
         border-top: 1px dotted gray;
       }
@@ -390,11 +390,11 @@
     &-middle-initial {
       width: 2em;
     }
-  
+
     &-state {
       width: 4em;
     }
-  
+
     &-zip-code {
       width: 7em;
     }
@@ -417,11 +417,11 @@
   #label-information {
     display: none;
   }
-    
+
   .label {
     page-break-after: always;
   }
-    
+
   @page {
     margin: 0;
   }

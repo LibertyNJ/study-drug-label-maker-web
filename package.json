@@ -1,0 +1,17 @@
+{
+  "name": "study-drug-label-creator",
+  "version": "0.0.0",
+  "description": "Allows pharmacy team members to produce labels for outpatient study drugs and writes entered data to log.xlsx.",
+  "main": "app.js",
+  "dependencies": {
+    "exceljs": "^1.6.3",
+    "express": "^4.16.4",
+    "multer": "^1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nathaniel J. Liberty",
+  "license": "MIT"
+}
