@@ -79,7 +79,8 @@ function Label(props) {
 }
 
 Label.propTypes = {
-  labelType: PropTypes.oneOf(['standard', 'infusion', '']).isRequired,
+  labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', ''])
+    .isRequired,
 
   patient: PropTypes.shape({
     name: PropTypes.object,
@@ -239,7 +240,9 @@ function MedicationSection(props) {
   const form = props.form ? props.form : 'Form';
   const manufacturer = props.manufacturer ? props.manufacturer : '';
 
-  const quantity = props.quantity ? getFormattedNumberString(props.quantity, numberFormat) : '##';
+  const quantity = props.quantity
+    ? getFormattedNumberString(props.quantity, numberFormat)
+    : '##';
   const sig = props.sig ? props.sig : 'Sig.';
 
   const diluent = props.diluent ? props.diluent : 'Diluent';
