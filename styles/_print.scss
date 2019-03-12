@@ -1,0 +1,19 @@
+@media print {
+  @page {
+    margin: 0;
+  }
+
+  main {
+    margin: 0;
+    padding: 0;
+  }
+
+  #preview-section {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .label {
+    page-break-after: always;
+  }
+}

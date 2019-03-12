@@ -241,7 +241,6 @@ function formInputHandler(event) {
 function formSubmitHandler(event) {
   event.preventDefault();
   window.print();
-  sendDataToDatabaseHandler();
 }
 
 function getElementValueById(fieldId) {
@@ -266,12 +265,20 @@ function padLeadingZeros(number, zeros) {
 
 function postFlight() {
   removePrintCopies();
+  submitFormData();
 
   function removePrintCopies() {
     const printCopies = document.querySelectorAll('.print-copy');
     for (let printCopy of printCopies) {
       printCopy.remove();
     }
+  }
+
+  function submitFormData() {
+    const formData = new FormData(formElement);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/submit');
+    xhr.send(formData);
   }
 }
 
