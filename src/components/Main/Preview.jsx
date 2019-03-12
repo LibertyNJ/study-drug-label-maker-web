@@ -239,7 +239,7 @@ function MedicationSection(props) {
   const form = props.form ? props.form : 'Form';
   const manufacturer = props.manufacturer ? props.manufacturer : '';
 
-  const quantity = props.quantity ? props.quantity : '##';
+  const quantity = props.quantity ? getFormattedNumberString(props.quantity, numberFormat) : '##';
   const sig = props.sig ? props.sig : 'Sig.';
 
   const diluent = props.diluent ? props.diluent : 'Diluent';
