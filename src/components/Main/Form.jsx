@@ -310,6 +310,7 @@ MainForm.propTypes = {
   prescriber: PropTypes.string.isRequired,
   pharmacist: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 function Section(props) {
@@ -678,6 +679,25 @@ function MedicationSection(props) {
   }
 }
 
+MedicationSection.propTypes = {
+  labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', ''])
+    .isRequired,
+  medication: PropTypes.shape({
+    name: PropTypes.string,
+    strength: PropTypes.object,
+    form: PropTypes.string,
+    sig: PropTypes.string,
+    manufacturer: PropTypes.string,
+    quantity: PropTypes.string,
+    diluent: PropTypes.string,
+    rate: PropTypes.string,
+    volume: PropTypes.string,
+    preparation: PropTypes.string,
+    expiration: PropTypes.string,
+  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
+
 function Toggle(props) {
   return (
     <div className={`custom-control custom-${props.type}`}>
@@ -773,6 +793,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   info: PropTypes.string,
   disabled: PropTypes.bool,
   append: PropTypes.shape({
@@ -789,6 +810,7 @@ Input.defaultProps = {
   disabled: undefined,
   append: undefined,
   attributes: undefined,
+  required: undefined,
 };
 
 export default MainForm;

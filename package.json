@@ -30,10 +30,11 @@
       },
       "electronPackagerConfig": {
         "packageManager": "npm",
-        "appCopyright": "© 2019 Nathaniel J. Liberty",
+        "appCopyright": ".",
         "asar": true,
         "executableName": "study-drug-label-maker",
         "name": "Study Drug Label Maker",
+        "icon": "src/assets/images/icon.ico",
         "win32metadata": {
           "CompanyName": "Northwell Health",
           "FileDescription": "Label maker for the research pharmacy program at North Shore University Hospital."

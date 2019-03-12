@@ -40,7 +40,7 @@
     .label__content {
       font: 7pt/1.15 sans-serif;
       height: inherit;
-      padding: 0.0625in;
+      padding: 0 0.125in 0.0625in 0;
     }
   }
 
@@ -84,6 +84,10 @@
     &--standard {
       .label__body {
         background: white;
+      }
+
+      .label__content {
+        padding: 0.0625in;
       }
     }
 

@@ -23,7 +23,7 @@ function Label(props) {
     case 'standard':
     case 'syringe':
       return (
-        <article className="label label--standard mx-auto">
+        <article className="label label--standard">
           <div className="label__body">
             <div className="label__content d-flex flex-column">
               <LabelHeader />
@@ -47,7 +47,7 @@ function Label(props) {
 
     case 'infusion':
       return (
-        <article className="label label--infusion mx-auto">
+        <article className="label label--infusion">
           <div className="label__body">
             <div className="label__upper-half">
               <LabelHeader />
@@ -63,7 +63,7 @@ function Label(props) {
               />
             </div>
             <div className="label__lower-half">
-              <DispenseSection />
+              <DispenseSection dispensed={props.dispensed} />
             </div>
           </div>
         </article>
@@ -109,6 +109,8 @@ Label.propTypes = {
 
   prescriber: PropTypes.string.isRequired,
   pharmacist: PropTypes.string.isRequired,
+
+  dispensed: PropTypes.string.isRequired,
 };
 
 function LabelHeader() {
@@ -321,7 +323,8 @@ function MedicationSection(props) {
 }
 
 MedicationSection.propTypes = {
-  labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', '']).isRequired,
+  labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', ''])
+    .isRequired,
 
   name: PropTypes.string.isRequired,
 
