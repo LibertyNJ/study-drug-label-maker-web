@@ -266,12 +266,25 @@ class MainForm extends React.Component {
               </div>
             </div>
           </Section>
-          <button
-            className="btn btn-primary btn-lg d-block ml-auto"
-            type="submit"
-          >
-            Print
-          </button>
+          <Section header="Print">
+            <div className="form-row">
+              <div className="form-group col">
+                <Toggle
+                  type="switch"
+                  name="researchPrintPaddingIsEnabled"
+                  checked={!this.props.researchPrintPaddingIsEnabled}
+                  label="Main pharmacy print padding"
+                  handleChange={this.props.handleChange}
+                />
+              </div>
+            </div>
+            <button
+              className="btn btn-primary btn-lg d-block ml-auto"
+              type="submit"
+            >
+              Print
+            </button>
+          </Section>
         </form>
       </section>
     );
@@ -311,6 +324,7 @@ MainForm.propTypes = {
   pharmacist: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  researchPrintPaddingIsEnabled: PropTypes.bool.isRequired,
 };
 
 function Section(props) {

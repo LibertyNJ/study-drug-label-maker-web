@@ -19,35 +19,41 @@ function MainPreview(props) {
 }
 
 function Label(props) {
+  const researchPrintPaddingClass = props.researchPrintPaddingIsEnabled
+    ? ' label--research-padding'
+    : '';
+
   switch (props.labelType) {
     case 'standard':
     case 'syringe':
       return (
-        <article className="label label--standard">
-          <div className="label__body">
-            <div className="label__content d-flex flex-column">
-              <LabelHeader />
-              <PatientSection {...props.patient} />
-              <StudySection {...props.study} />
-              <MedicationSection
-                {...props.medication}
-                labelType={props.labelType}
-              />
-              <PrescriberPharmacistSection
-                prescriber={props.prescriber}
-                pharmacist={props.pharmacist}
-              />
-              <footer className="mt-auto">
-                <DispenseSection dispensed={props.dispensed} />
-              </footer>
-            </div>
+        <article
+          className={`label label--standard${researchPrintPaddingClass}`}
+        >
+          <div className="label__body d-flex flex-column">
+            <LabelHeader />
+            <PatientSection {...props.patient} />
+            <StudySection {...props.study} />
+            <MedicationSection
+              {...props.medication}
+              labelType={props.labelType}
+            />
+            <PrescriberPharmacistSection
+              prescriber={props.prescriber}
+              pharmacist={props.pharmacist}
+            />
+            <footer className="mt-auto">
+              <DispenseSection dispensed={props.dispensed} />
+            </footer>
           </div>
         </article>
       );
 
     case 'infusion':
       return (
-        <article className="label label--infusion">
+        <article
+          className={`label label--infusion${researchPrintPaddingClass}`}
+        >
           <div className="label__body">
             <div className="label__upper-half">
               <LabelHeader />
@@ -112,6 +118,8 @@ Label.propTypes = {
   pharmacist: PropTypes.string.isRequired,
 
   dispensed: PropTypes.string.isRequired,
+
+  researchPrintPaddingIsEnabled: PropTypes.bool.isRequired,
 };
 
 function LabelHeader() {

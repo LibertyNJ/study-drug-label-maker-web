@@ -49,6 +49,8 @@ class Main extends React.Component {
       pharmacist: '',
 
       dispensed: '',
+
+      researchPrintPaddingIsEnabled: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -200,6 +202,9 @@ class Main extends React.Component {
             medication={medication}
             prescriber={this.state.prescriber}
             pharmacist={this.state.pharmacist}
+            researchPrintPaddingIsEnabled={
+              this.state.researchPrintPaddingIsEnabled
+            }
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
@@ -211,6 +216,9 @@ class Main extends React.Component {
             prescriber={this.state.prescriber}
             pharmacist={this.state.pharmacist}
             dispensed={this.state.dispensed}
+            researchPrintPaddingIsEnabled={
+              this.state.researchPrintPaddingIsEnabled
+            }
           />
         </main>
         <Footer version={this.props.version} />

@@ -32,15 +32,11 @@
     width: 3.625in;
 
     .label__body {
+      font: 7pt/1.15 sans-serif;
       height: 1.9375in;
       margin: 0.03125in 0.0625in;
-      width: 3.5in;
-    }
-
-    .label__content {
-      font: 7pt/1.15 sans-serif;
-      height: inherit;
       padding: 0 0.125in 0.0625in 0;
+      width: 3.5in;
     }
   }
 
@@ -56,17 +52,20 @@
     .label__body {
       height: 5in;
       margin: 0.0625in;
+      padding: 0 0.25in 0 0;
       width: 3in;
     }
 
     .label__lower-half {
-      height: 1.625in;
-      margin: 0.25in 0.25in 0 0;
+      height: 1.8125in;
+      padding-top: 0.125in;
+      margin-top: 0.0625in;
+      width: 2.75in;
     }
 
     .label__upper-half {
       height: 2.875in;
-      margin: 0 0.25in 0 0;
+      width: 2.75in;
     }
   }
 }
@@ -84,9 +83,6 @@
     &--standard {
       .label__body {
         background: white;
-      }
-
-      .label__content {
         padding: 0.0625in;
       }
     }
@@ -94,14 +90,7 @@
     &--infusion {
       .label__body {
         background: yellow;
-      }
-
-      .label__lower-half {
-        margin: 0.25in 0.125in 0.125in 0.125in;
-      }
-
-      .label__upper-half {
-        margin: 0.125in 0.125in 0 0.125in;
+        padding: 0.125in;
       }
     }
   }

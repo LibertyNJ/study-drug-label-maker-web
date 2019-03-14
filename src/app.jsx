@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Main from './screens/Main';
 import Help from './screens/Help';
 
-const version = '1.0.0';
+const version = '1.1.0';
 
 export default class App extends React.Component {
   render() {

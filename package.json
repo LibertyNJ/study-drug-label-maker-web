@@ -1,9 +1,9 @@
 {
   "name": "study-drug-label-maker",
   "productName": "Study Drug Label Maker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Label maker for the research pharmacy program at North Shore University Hospital.",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
