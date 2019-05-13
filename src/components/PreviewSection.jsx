@@ -1,25 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function getFormattedDateString(dateString, formatObject) {
-  return new Date(dateString).toLocaleString('en-US', formatObject);
-}
+const getFormattedDateString = (dateString, formatObject) =>
+  new Date(dateString).toLocaleString('en-US', formatObject);
 
-function getFormattedNumberString(numberString, formatObject) {
-  return Number(numberString).toLocaleString('en-US', formatObject);
-}
+const getFormattedNumberString = (numberString, formatObject) =>
+  Number(numberString).toLocaleString('en-US', formatObject);
 
-function MainPreview(props) {
-  return (
-    <section id="preview-section" className="col">
-      <h2 className="d-print-none text-primary">Preview</h2>
-      <Label {...props} />
-    </section>
-  );
-}
+const Preview = props => (
+  <section id="preview-section" className="col">
+    <h2 className="d-print-none text-primary">Preview</h2>
+    <Label {...props} />
+  </section>
+);
 
-function Label(props) {
-  const researchPrintPaddingClass = props.researchPrintPaddingIsEnabled
+const Label = props => {
+  const researchPrintPaddingClass = props.researchPrintFormatIsEnabled
     ? ' label--research-padding'
     : '';
 
@@ -82,23 +78,22 @@ function Label(props) {
         </div>
       );
   }
-}
+};
 
 Label.propTypes = {
-  labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', ''])
-    .isRequired,
+  labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', '']),
 
   patient: PropTypes.shape({
     name: PropTypes.object,
     dob: PropTypes.string,
     address: PropTypes.object,
-  }).isRequired,
+  }),
 
   study: PropTypes.shape({
     protocol: PropTypes.string,
     rxNumber: PropTypes.object,
     patientNumber: PropTypes.string,
-  }).isRequired,
+  }),
 
   medication: PropTypes.shape({
     name: PropTypes.string,
@@ -112,39 +107,69 @@ Label.propTypes = {
     sig: PropTypes.string,
     preparation: PropTypes.string,
     expiration: PropTypes.string,
-  }).isRequired,
+  }),
 
-  prescriber: PropTypes.string.isRequired,
-  pharmacist: PropTypes.string.isRequired,
-
-  dispensed: PropTypes.string.isRequired,
-
-  researchPrintPaddingIsEnabled: PropTypes.bool.isRequired,
+  prescriber: PropTypes.string,
+  pharmacist: PropTypes.string,
+  dispensed: PropTypes.string,
+  researchPrintFormatIsEnabled: PropTypes.bool.isRequired,
 };
 
-function LabelHeader() {
-  return (
-    <header>
-      <p className="text-center font-weight-bold">
-        North Shore University Hospital — Pharmacy Department
-      </p>
-      <div className="d-flex justify-content-between m-0">
-        <p>
-          300 Community Drive
-          <br />
-          Manhasset, NY 11030
-        </p>
-        <p>
-          DEA# AN0768917
-          <br />
-          (516)562-4700
-        </p>
-      </div>
-    </header>
-  );
-}
+Label.defaultProps = {
+  labelType: '',
 
-function PatientSection(props) {
+  patient: PropTypes.shape({
+    name: PropTypes.object,
+    dob: '',
+    address: PropTypes.object,
+  }),
+
+  study: PropTypes.shape({
+    protocol: '',
+    rxNumber: PropTypes.object,
+    patientNumber: '',
+  }),
+
+  medication: PropTypes.shape({
+    name: '',
+    strength: PropTypes.object,
+    form: '',
+    diluent: '',
+    volume: '',
+    rate: '',
+    manufacturer: '',
+    quantity: '',
+    sig: '',
+    preparation: '',
+    expiration: '',
+  }),
+
+  prescriber: '',
+  pharmacist: '',
+  dispensed: '',
+};
+
+const LabelHeader = () => (
+  <header>
+    <p className="text-center font-weight-bold">
+      North Shore University Hospital — Pharmacy Department
+    </p>
+    <div className="d-flex justify-content-between m-0">
+      <p>
+        300 Community Drive
+        <br />
+        Manhasset, NY 11030
+      </p>
+      <p>
+        DEA# AN0768917
+        <br />
+        (516)562-4700
+      </p>
+    </div>
+  </header>
+);
+
+const PatientSection = props => {
   const dateFormat = {
     month: '2-digit',
     day: '2-digit',
@@ -186,7 +211,7 @@ function PatientSection(props) {
       </div>
     </section>
   );
-}
+};
 
 PatientSection.propTypes = {
   name: PropTypes.shape({
@@ -206,17 +231,15 @@ PatientSection.propTypes = {
   }).isRequired,
 };
 
-function StudySection(props) {
-  return (
-    <section className="mb-1">
-      <div className="d-flex justify-content-between m-0">
-        <p>Protocol: {props.protocol}</p>
-        <p>Rx #: {props.rxNumber.value}</p>
-      </div>
-      <p>Patient #: {props.patientNumber}</p>
-    </section>
-  );
-}
+const StudySection = props => (
+  <section className="mb-1">
+    <div className="d-flex justify-content-between m-0">
+      <p>Protocol: {props.protocol}</p>
+      <p>Rx #: {props.rxNumber.value}</p>
+    </div>
+    <p>Patient #: {props.patientNumber}</p>
+  </section>
+);
 
 StudySection.propTypes = {
   protocol: PropTypes.string.isRequired,
@@ -229,7 +252,7 @@ StudySection.propTypes = {
   patientNumber: PropTypes.string.isRequired,
 };
 
-function MedicationSection(props) {
+const MedicationSection = props => {
   const numberFormat = {
     useGrouping: true,
   };
@@ -251,8 +274,8 @@ function MedicationSection(props) {
   const quantity = props.quantity
     ? getFormattedNumberString(props.quantity, numberFormat)
     : '##';
-  const sig = props.sig ? props.sig : 'Sig.';
 
+  const sig = props.sig ? props.sig : 'Sig.';
   const diluent = props.diluent ? props.diluent : 'Diluent';
   const volume = props.volume ? props.volume : '## mL';
   const rate = props.rate ? props.rate : '## mL / hr';
@@ -260,6 +283,7 @@ function MedicationSection(props) {
   const preparation = props.preparation
     ? getFormattedDateString(props.preparation, dateFormat)
     : 'MM/DD/YYYY hh:mm';
+
   const expiration = props.expiration
     ? getFormattedDateString(props.expiration, dateFormat)
     : 'MM/DD/YYYY hh:mm';
@@ -331,7 +355,7 @@ function MedicationSection(props) {
     default:
       return null;
   }
-}
+};
 
 MedicationSection.propTypes = {
   labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', ''])
@@ -355,7 +379,7 @@ MedicationSection.propTypes = {
   expiration: PropTypes.string.isRequired,
 };
 
-function PrescriberPharmacistSection(props) {
+const PrescriberPharmacistSection = props => {
   const prescriber = props.prescriber ? props.prescriber : '';
   const pharmacist = props.pharmacist ? props.pharmacist : '';
 
@@ -367,14 +391,14 @@ function PrescriberPharmacistSection(props) {
       </div>
     </section>
   );
-}
+};
 
 PrescriberPharmacistSection.propTypes = {
   prescriber: PropTypes.string.isRequired,
   pharmacist: PropTypes.string.isRequired,
 };
 
-function DispenseSection(props) {
+const DispenseSection = props => {
   const dispensed = props.dispensed ? props.dispensed : 'MM/DD/YYYY hh:mm';
 
   return (
@@ -386,10 +410,10 @@ function DispenseSection(props) {
       <p>Dispensed: {dispensed}</p>
     </section>
   );
-}
+};
 
 DispenseSection.propTypes = {
   dispensed: PropTypes.string.isRequired,
 };
 
-export default MainPreview;
+export default Preview;

@@ -1,56 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Header from '../components/UI/Header';
-import Footer from '../components/UI/Footer/Footer';
-import MainForm from '../components/Main/Form';
-import MainPreview from '../components/Main/Preview';
-
-const propTypes = {
-  version: PropTypes.string.isRequired,
-};
+import FormSection from '../components/FormSection';
+import PreviewSection from '../components/PreviewSection';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      labelType: '',
-
-      patientNameLast: '',
-      patientNameFirst: '',
-      patientNameMi: '',
-      patientDob: '',
-      patientAddress1: '',
-      patientAddress2: '',
-      patientCity: '',
-      patientState: '',
-      patientZip: '',
-
-      studyProtocol: '',
-      studyRxNumber: '',
       studyRxNumberIsOverridden: false,
-      studyPatientNumber: '',
-
-      medicationName: '',
-      medicationStrength: '',
       medicationStrengthIsRequired: true,
-      medicationForm: '',
-      medicationDiluent: '',
-      medicationVolume: '',
-      medicationRate: '',
-      medicationManufacturer: '',
-      medicationQuantity: '',
-      medicationSig: '',
-      medicationPreparation: '',
-      medicationExpiration: '',
-
-      prescriber: '',
-      pharmacist: '',
-
-      dispensed: '',
-
-      researchPrintPaddingIsEnabled: true,
+      researchPrintFormatIsEnabled: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -60,7 +20,6 @@ class Main extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    const value = target.value;
 
     if (target.type === 'checkbox') {
       this.setState(state => {
@@ -80,6 +39,7 @@ class Main extends React.Component {
       ];
 
       const capitalizeList = ['patientState'];
+      const value = target.value;
 
       if (titleCaseList.includes(name)) {
         this.setState({
@@ -96,6 +56,8 @@ class Main extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    const now = new Date();
+    
     const dateFormat = {
       month: '2-digit',
       day: '2-digit',
@@ -105,23 +67,25 @@ class Main extends React.Component {
       hour12: false,
     };
 
-    const now = new Date();
-
     if (!this.state.studyRxNumberIsOverridden) {
       const year = now.getFullYear();
       const month = (now.getMonth() + 1).toString().padStart(2, '0');
+
       const day = now
         .getDate()
         .toString()
         .padStart(2, '0');
+
       const hours = now
         .getHours()
         .toString()
         .padStart(2, '0');
+
       const minutes = now
         .getMinutes()
         .toString()
         .padStart(2, '0');
+
       const seconds = now
         .getSeconds()
         .toString()
@@ -192,23 +156,22 @@ class Main extends React.Component {
     };
 
     return (
-      <div className="vh-100 d-flex d-print-block flex-column">
-        <Header heading="Study Drug Label Maker" helpButtonIsEnabled />
-        <main className="container-fluid row mh-0">
-          <MainForm
+      <React.Fragment>
+        <div className="row">
+          <FormSection
             labelType={this.state.labelType}
             patient={patient}
             study={study}
             medication={medication}
             prescriber={this.state.prescriber}
             pharmacist={this.state.pharmacist}
-            researchPrintPaddingIsEnabled={
-              this.state.researchPrintPaddingIsEnabled
+            researchPrintFormatIsEnabled={
+              this.state.researchPrintFormatIsEnabled
             }
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
-          <MainPreview
+          <PreviewSection
             labelType={this.state.labelType}
             patient={patient}
             study={study}
@@ -216,17 +179,14 @@ class Main extends React.Component {
             prescriber={this.state.prescriber}
             pharmacist={this.state.pharmacist}
             dispensed={this.state.dispensed}
-            researchPrintPaddingIsEnabled={
-              this.state.researchPrintPaddingIsEnabled
+            researchPrintFormatIsEnabled={
+              this.state.researchPrintFormatIsEnabled
             }
           />
-        </main>
-        <Footer version={this.props.version} />
-      </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
-
-Main.propTypes = propTypes;
 
 export default Main;

@@ -13,6 +13,9 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     show: false,
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
@@ -26,7 +29,6 @@ const createWindow = async () => {
     await installExtension(REACT_DEVELOPER_TOOLS);
     mainWindow.webContents.openDevTools();
   }
-
 
   mainWindow.on('closed', () => {
     mainWindow = null;

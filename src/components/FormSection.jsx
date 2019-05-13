@@ -1,298 +1,302 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-class MainForm extends React.Component {
-  render() {
-    return (
-      <section className="d-print-none overflow-auto col">
-        <h2 className="text-primary">Form</h2>
-        <form onSubmit={this.props.handleSubmit}>
-          <fieldset className="form-group">
-            <legend>Label type</legend>
-            <div className="form-check-inline">
-              <Toggle
-                type="radio"
-                name="labelType"
-                value="standard"
-                checked={this.props.labelType === 'standard'}
-                label="Standard"
-                handleChange={this.props.handleChange}
-              />
-            </div>
-            <div className="form-check-inline">
-              <Toggle
-                type="radio"
-                name="labelType"
-                value="infusion"
-                checked={this.props.labelType === 'infusion'}
-                label="Infusion"
-                handleChange={this.props.handleChange}
-              />
-            </div>
-            <div className="form-check-inline">
-              <Toggle
-                type="radio"
-                name="labelType"
-                value="syringe"
-                checked={this.props.labelType === 'syringe'}
-                label="Syringe"
-                handleChange={this.props.handleChange}
-              />
-            </div>
-          </fieldset>
-          <Section header="Patient">
-            <fieldset className="form-group">
-              <legend>Name</legend>
-              <div className="form-row">
-                <div className="form-group col">
-                  <Input
-                    type="text"
-                    name="patientNameLast"
-                    value={this.props.patient.name.last}
-                    label="Last"
-                    required
-                    attributes={{
-                      placeholder: 'Doe…',
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-                <div className="form-group col">
-                  <Input
-                    type="text"
-                    name="patientNameFirst"
-                    value={this.props.patient.name.first}
-                    label="First"
-                    required
-                    attributes={{
-                      placeholder: 'John…',
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-                <div className="form-group col-2">
-                  <Input
-                    type="text"
-                    name="patientNameMi"
-                    value={this.props.patient.name.mi}
-                    label="M.I."
-                    info="Optional"
-                    attributes={{
-                      placeholder: 'G…',
-                      maxLength: 1,
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-              </div>
-            </fieldset>
-            <div className="form-row">
-              <div className="form-group col-5">
-                <Input
-                  type="date"
-                  name="patientDob"
-                  value={this.props.patient.dob}
-                  label="Date of birth"
-                  required
-                  attributes={{
-                    max: '9999-12-31',
-                  }}
-                  handleChange={this.props.handleChange}
-                />
-              </div>
-            </div>
-            <fieldset>
-              <legend>Address</legend>
-              <div className="form-row">
-                <div className="form-group col">
-                  <Input
-                    type="text"
-                    name="patientAddress1"
-                    value={this.props.patient.address.street}
-                    label="Street"
-                    required
-                    attributes={{
-                      placeholder: '123 Any Street…',
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group col">
-                  <Input
-                    type="text"
-                    name="patientAddress2"
-                    value={this.props.patient.address.apartment}
-                    label="Apartment"
-                    info="Optional"
-                    attributes={{
-                      placeholder: 'Apt. ABC…',
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group col-6">
-                  <Input
-                    type="text"
-                    name="patientCity"
-                    value={this.props.patient.address.city}
-                    label="City"
-                    required
-                    attributes={{
-                      placeholder: 'Anytown…',
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-                <div className="form-group col-2">
-                  <Input
-                    type="text"
-                    name="patientState"
-                    value={this.props.patient.address.state}
-                    label="State"
-                    required
-                    attributes={{
-                      placeholder: 'NY…',
-                      maxLength: 2,
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-                <div className="form-group col-4">
-                  <Input
-                    type="text"
-                    name="patientZip"
-                    value={this.props.patient.address.zip}
-                    label="ZIP"
-                    required
-                    attributes={{
-                      placeholder: '12345…',
-                      maxLength: 5,
-                    }}
-                    handleChange={this.props.handleChange}
-                  />
-                </div>
-              </div>
-            </fieldset>
-          </Section>
-          <Section header="Study">
-            <div className="form-row">
-              <div className="form-group col-6">
-                <Input
-                  type="text"
-                  name="studyProtocol"
-                  value={this.props.study.protocol}
-                  label="Protocol"
-                  required
-                  attributes={{
-                    placeholder: 'D3561C00009…',
-                  }}
-                  handleChange={this.props.handleChange}
-                />
-              </div>
-              <div className="form-group col-6">
-                <Input
-                  type="text"
-                  name="studyRxNumber"
-                  value={this.props.study.rxNumber.value}
-                  label="Rx number"
-                  required={this.props.study.rxNumber.isOverridden}
-                  disabled={!this.props.study.rxNumber.isOverridden}
-                  attributes={{
-                    placeholder: '20181203112556…',
-                  }}
-                  handleChange={this.props.handleChange}
-                />
-                <Toggle
-                  type="switch"
-                  name="studyRxNumberIsOverridden"
-                  checked={this.props.study.rxNumber.isOverridden}
-                  label="Override"
-                  handleChange={this.props.handleChange}
-                />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col-6">
-                <Input
-                  type="text"
-                  name="studyPatientNumber"
-                  value={this.props.study.patientNumber}
-                  label="Patient number"
-                  required
-                  attributes={{
-                    placeholder: '002806…',
-                  }}
-                  handleChange={this.props.handleChange}
-                />
-              </div>
-            </div>
-          </Section>
-          <MedicationSection
-            labelType={this.props.labelType}
-            medication={this.props.medication}
-            handleChange={this.props.handleChange}
+import Button from './Button';
+import SVGIcon from './SVGIcon';
+
+const Form = props => (
+  <section className="col d-flex flex-column d-print-none">
+    <header>
+      <h2 className="text-primary">Form</h2>
+    </header>
+    <form className="form overflow-auto px-3" onSubmit={props.handleSubmit}>
+      <fieldset className="form-group">
+        <legend>Label type</legend>
+        <div className="form-check-inline">
+          <Toggle
+            type="radio"
+            name="labelType"
+            value="standard"
+            checked={props.labelType === 'standard'}
+            label="Standard"
+            handleChange={props.handleChange}
           />
-          <Section header="Prescriber and pharmacist">
-            <div className="form-row">
-              <div className="form-group col">
-                <Input
-                  type="text"
-                  name="prescriber"
-                  value={this.props.prescriber}
-                  label="Prescriber"
-                  required
-                  attributes={{
-                    placeholder: 'Somebody, MD…',
-                  }}
-                  handleChange={this.props.handleChange}
-                />
-              </div>
-              <div className="form-group col">
-                <Input
-                  type="text"
-                  name="pharmacist"
-                  value={this.props.pharmacist}
-                  label="Pharmacist"
-                  required
-                  attributes={{
-                    placeholder: 'Soandso, RPh…',
-                  }}
-                  handleChange={this.props.handleChange}
-                />
-              </div>
+        </div>
+        <div className="form-check-inline">
+          <Toggle
+            type="radio"
+            name="labelType"
+            value="infusion"
+            checked={props.labelType === 'infusion'}
+            label="Infusion"
+            handleChange={props.handleChange}
+          />
+        </div>
+        <div className="form-check-inline">
+          <Toggle
+            type="radio"
+            name="labelType"
+            value="syringe"
+            checked={props.labelType === 'syringe'}
+            label="Syringe"
+            handleChange={props.handleChange}
+          />
+        </div>
+      </fieldset>
+      <Section header="Patient">
+        <fieldset className="form-group">
+          <legend>Name</legend>
+          <div className="form-row">
+            <div className="form-group col">
+              <Input
+                type="text"
+                name="patientNameLast"
+                value={props.patient.name.last}
+                label="Last"
+                required
+                attributes={{
+                  placeholder: 'Doe…',
+                }}
+                handleChange={props.handleChange}
+              />
             </div>
-          </Section>
-          <Section header="Print">
-            <div className="form-row">
-              <div className="form-group col">
-                <Toggle
-                  type="switch"
-                  name="researchPrintPaddingIsEnabled"
-                  checked={!this.props.researchPrintPaddingIsEnabled}
-                  label="Main pharmacy print padding"
-                  handleChange={this.props.handleChange}
-                />
-              </div>
+            <div className="form-group col">
+              <Input
+                type="text"
+                name="patientNameFirst"
+                value={props.patient.name.first}
+                label="First"
+                required
+                attributes={{
+                  placeholder: 'John…',
+                }}
+                handleChange={props.handleChange}
+              />
             </div>
-            <button
-              className="btn btn-primary btn-lg d-block ml-auto"
+            <div className="form-group col-2">
+              <Input
+                type="text"
+                name="patientNameMi"
+                value={props.patient.name.mi}
+                label="M.I."
+                info="Optional"
+                attributes={{
+                  placeholder: 'G…',
+                  maxLength: 1,
+                }}
+                handleChange={props.handleChange}
+              />
+            </div>
+          </div>
+        </fieldset>
+        <div className="form-row">
+          <div className="form-group col-5">
+            <Input
+              type="date"
+              name="patientDob"
+              value={props.patient.dob}
+              label="Date of birth"
+              required
+              attributes={{
+                max: '9999-12-31',
+              }}
+              handleChange={props.handleChange}
+            />
+          </div>
+        </div>
+        <fieldset>
+          <legend>Address</legend>
+          <div className="form-row">
+            <div className="form-group col">
+              <Input
+                type="text"
+                name="patientAddress1"
+                value={props.patient.address.street}
+                label="Street"
+                required
+                attributes={{
+                  placeholder: '123 Any Street…',
+                }}
+                handleChange={props.handleChange}
+              />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group col">
+              <Input
+                type="text"
+                name="patientAddress2"
+                value={props.patient.address.apartment}
+                label="Apartment"
+                info="Optional"
+                attributes={{
+                  placeholder: 'Apt. ABC…',
+                }}
+                handleChange={props.handleChange}
+              />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group col-6">
+              <Input
+                type="text"
+                name="patientCity"
+                value={props.patient.address.city}
+                label="City"
+                required
+                attributes={{
+                  placeholder: 'Anytown…',
+                }}
+                handleChange={props.handleChange}
+              />
+            </div>
+            <div className="form-group col-2">
+              <Input
+                type="text"
+                name="patientState"
+                value={props.patient.address.state}
+                label="State"
+                required
+                attributes={{
+                  placeholder: 'NY…',
+                  maxLength: 2,
+                }}
+                handleChange={props.handleChange}
+              />
+            </div>
+            <div className="form-group col-4">
+              <Input
+                type="text"
+                name="patientZip"
+                value={props.patient.address.zip}
+                label="ZIP"
+                required
+                attributes={{
+                  placeholder: '12345…',
+                  maxLength: 5,
+                }}
+                handleChange={props.handleChange}
+              />
+            </div>
+          </div>
+        </fieldset>
+      </Section>
+      <Section header="Study">
+        <div className="form-row">
+          <div className="form-group col-6">
+            <Input
+              type="text"
+              name="studyProtocol"
+              value={props.study.protocol}
+              label="Protocol"
+              required
+              attributes={{
+                placeholder: 'D3561C00009…',
+              }}
+              handleChange={props.handleChange}
+            />
+          </div>
+          <div className="form-group col-6">
+            <Input
+              type="text"
+              name="studyRxNumber"
+              value={props.study.rxNumber.value}
+              label="Rx number"
+              required={props.study.rxNumber.isOverridden}
+              disabled={!props.study.rxNumber.isOverridden}
+              attributes={{
+                placeholder: '20181203112556…',
+              }}
+              handleChange={props.handleChange}
+            />
+            <Toggle
+              type="switch"
+              name="studyRxNumberIsOverridden"
+              checked={props.study.rxNumber.isOverridden}
+              label="Override"
+              handleChange={props.handleChange}
+            />
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group col-6">
+            <Input
+              type="text"
+              name="studyPatientNumber"
+              value={props.study.patientNumber}
+              label="Patient number"
+              required
+              attributes={{
+                placeholder: '002806…',
+              }}
+              handleChange={props.handleChange}
+            />
+          </div>
+        </div>
+      </Section>
+      <MedicationSection
+        labelType={props.labelType}
+        medication={props.medication}
+        handleChange={props.handleChange}
+      />
+      <Section header="Prescriber and pharmacist">
+        <div className="form-row">
+          <div className="form-group col">
+            <Input
+              type="text"
+              name="prescriber"
+              value={props.prescriber}
+              label="Prescriber"
+              required
+              attributes={{
+                placeholder: 'Somebody, MD…',
+              }}
+              handleChange={props.handleChange}
+            />
+          </div>
+          <div className="form-group col">
+            <Input
+              type="text"
+              name="pharmacist"
+              value={props.pharmacist}
+              label="Pharmacist"
+              required
+              attributes={{
+                placeholder: 'Soandso, RPh…',
+              }}
+              handleChange={props.handleChange}
+            />
+          </div>
+        </div>
+      </Section>
+      <Section header="Print">
+        <div className="form-row">
+          <div className="form-group col-9">
+            <Toggle
+              type="switch"
+              name="researchPrintFormatIsEnabled"
+              checked={!props.researchPrintFormatIsEnabled}
+              label="Main pharmacy print format"
+              handleChange={props.handleChange}
+            />
+          </div>
+          <div className="col-3">
+            <Button
               type="submit"
-            >
-              Print
-            </button>
-          </Section>
-        </form>
-      </section>
-    );
-  }
-}
+              text="Print"
+              icon="print"
+              color="primary"
+              className="btn-lg d-block ml-auto"
+            />
+          </div>
+        </div>
+      </Section>
+    </form>
+  </section>
+);
 
-MainForm.propTypes = {
-  labelType: PropTypes.string.isRequired,
+Form.propTypes = {
+  labelType: PropTypes.string,
 
   patient: PropTypes.shape({
     name: PropTypes.object,
@@ -320,11 +324,17 @@ MainForm.propTypes = {
     expiration: PropTypes.string,
   }).isRequired,
 
-  prescriber: PropTypes.string.isRequired,
-  pharmacist: PropTypes.string.isRequired,
+  prescriber: PropTypes.string,
+  pharmacist: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  researchPrintPaddingIsEnabled: PropTypes.bool.isRequired,
+  researchPrintFormatIsEnabled: PropTypes.bool.isRequired,
+};
+
+Form.defaultProps = {
+  labelType: '',
+  prescriber: '',
+  pharmacist: '',
 };
 
 function Section(props) {
@@ -627,7 +637,6 @@ function MedicationSection(props) {
                 handleChange={props.handleChange}
               />
             </div>
-
             <div className="form-group col-3">
               <Input
                 type="text"
@@ -747,7 +756,7 @@ Toggle.defaultProps = {
   value: undefined,
 };
 
-function Input(props) {
+const Input = props => {
   const InputElement = props.type === 'textarea' ? 'textarea' : 'input';
 
   if (props.append) {
@@ -796,16 +805,25 @@ function Input(props) {
         {...props.attributes}
       />
       {props.info ? (
-        <small className="form-text text-info">{props.info}</small>
+        <small className="form-text text-info">
+          <SVGIcon
+            className="align-baseline"
+            type="info-circle"
+            width="1em"
+            height="1em"
+            fill="#17b2a8"
+          />{' '}
+          {props.info}
+        </small>
       ) : null}
     </div>
   );
-}
+};
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   info: PropTypes.string,
@@ -820,6 +838,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  value: '',
   info: undefined,
   disabled: undefined,
   append: undefined,
@@ -827,4 +846,4 @@ Input.defaultProps = {
   required: undefined,
 };
 
-export default MainForm;
+export default Form;
