@@ -8,9 +8,16 @@ const getFormattedNumberString = (numberString, formatObject) =>
   Number(numberString).toLocaleString('en-US', formatObject);
 
 const Preview = props => (
-  <section id="preview-section" className="col">
-    <h2 className="d-print-none text-primary">Preview</h2>
-    <Label {...props} />
+  <section
+    id="preview-section"
+    className="col d-flex flex-column d-print-block"
+  >
+    <header className="d-print-none">
+      <h2 className="text-primary">Preview</h2>
+    </header>
+    <div className="flex-grow-1 overflow-auto">
+      <Label {...props} />
+    </div>
   </section>
 );
 
@@ -220,7 +227,7 @@ PatientSection.propTypes = {
     mi: PropTypes.string,
   }).isRequired,
 
-  dob: PropTypes.string.isRequired,
+  dob: PropTypes.string,
 
   address: PropTypes.shape({
     street: PropTypes.string,
@@ -229,6 +236,10 @@ PatientSection.propTypes = {
     state: PropTypes.string,
     zip: PropTypes.string,
   }).isRequired,
+};
+
+PatientSection.defaultProps = {
+  dob: '',
 };
 
 const StudySection = props => (
@@ -242,14 +253,18 @@ const StudySection = props => (
 );
 
 StudySection.propTypes = {
-  protocol: PropTypes.string.isRequired,
+  protocol: PropTypes.string,
+  patientNumber: PropTypes.string,
 
   rxNumber: PropTypes.shape({
     value: PropTypes.string,
     isOverridden: PropTypes.bool,
   }).isRequired,
+};
 
-  patientNumber: PropTypes.string.isRequired,
+StudySection.defaultProps = {
+  protocol: '',
+  patientNumber: '',
 };
 
 const MedicationSection = props => {
@@ -361,22 +376,35 @@ MedicationSection.propTypes = {
   labelType: PropTypes.oneOf(['standard', 'infusion', 'syringe', ''])
     .isRequired,
 
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
 
   strength: PropTypes.shape({
     value: PropTypes.string,
     isRequired: PropTypes.bool,
   }).isRequired,
 
-  form: PropTypes.string.isRequired,
-  manufacturer: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
-  sig: PropTypes.string.isRequired,
-  diluent: PropTypes.string.isRequired,
-  volume: PropTypes.string.isRequired,
-  rate: PropTypes.string.isRequired,
-  preparation: PropTypes.string.isRequired,
-  expiration: PropTypes.string.isRequired,
+  form: PropTypes.string,
+  manufacturer: PropTypes.string,
+  quantity: PropTypes.string,
+  sig: PropTypes.string,
+  diluent: PropTypes.string,
+  volume: PropTypes.string,
+  rate: PropTypes.string,
+  preparation: PropTypes.string,
+  expiration: PropTypes.string,
+};
+
+MedicationSection.defaultProps = {
+  name: '',
+  form: '',
+  manufacturer: '',
+  quantity: '',
+  sig: '',
+  diluent: '',
+  volume: '',
+  rate: '',
+  preparation: '',
+  expiration: '',
 };
 
 const PrescriberPharmacistSection = props => {

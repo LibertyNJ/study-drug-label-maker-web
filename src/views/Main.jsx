@@ -157,7 +157,7 @@ class Main extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="row">
+        <div className="row flex-nowrap">
           <FormSection
             labelType={this.state.labelType}
             patient={patient}
