@@ -1,20 +1,18 @@
+'use-strict';
+
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import Layout from './components/Layout';
+import store from './redux/store';
+import Main from './views/Main';
 
-import Main from './views/MainView';
-import Help from './views/HelpView';
-
-import { version } from '../package.json';
-
-const App = () => (
-  <Layout version={version}>
-    <Switch>
-      <Route exact path="/" component={Main} />
-      <Route path="/help" component={Help} />
-    </Switch>
-  </Layout>
-);
-
-export default App;
+export default function App() {
+  return (
+    <Provider store={store}>
+      <Layout>
+        <Main />
+      </Layout>
+    </Provider>
+  );
+}

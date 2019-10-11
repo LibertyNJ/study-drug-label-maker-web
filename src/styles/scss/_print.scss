@@ -1,33 +1,29 @@
 @media print {
   @page {
     margin: 0;
-  }
-
-  main {
-    margin: 0;
-    padding: 0;
-  }
-
-  #preview-section {
-    margin: 0;
     padding: 0;
   }
 
   .label {
     page-break-after: always;
+
+    &--alternate-format {
+      &.label--standard {
+        .label__body {
+          padding: 0 0.1875in 0.125in 0;
+        }
+      }
+
+      &.label--infusion {
+        .label__body {
+          padding: 0.0625in 0.25in 0 0;
+        }
+      }
+    }
   }
 
-  .label--research-padding {
-    &.label--standard {
-      .label__body {
-        padding: 0 0.1875in 0.125in 0;
-      }
-    }
-
-    &.label--infusion {
-      .label__body {
-        padding: 0.0625in 0.25in 0 0;
-      }
-    }
+  #label-section {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }

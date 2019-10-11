@@ -1,20 +1,22 @@
 {
   "name": "study-drug-label-maker",
   "productName": "Study Drug Label Maker",
-  "version": "1.1.1",
-  "description": "Label maker for the research pharmacy program at North Shore University Hospital.",
+  "version": "1.2.0",
+  "description": "Label maker for study drugs of various kinds.",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package --arch=ia32",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src",
+    "make": "electron-forge make",
+    "package": "electron-forge package --arch=ia32",
+    "publish": "electron-forge publish",
+    "start": "electron-forge start",
+    "test": "jest --coverage",
     "watch-my-sass": "start node-sass --watch --output-style=compressed ./src/styles/scss/style.scss ./src/styles/css/style.css && start postcss ./src/styles/css/style.css --use autoprefixer --verbose --output ./src/styles/style.css --watch"
   },
   "keywords": [],
-  "author": "Nathaniel J. Liberty",
-  "license": "MIT",
+  "author": "Nathaniel J. Liberty <nathaniel.liberty@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
   "config": {
     "forge": {
       "make_targets": {
@@ -31,14 +33,15 @@
       },
       "electronPackagerConfig": {
         "packageManager": "npm",
-        "appCopyright": ".",
+        "appCopyright": "© Nathaniel J. Liberty 2019",
         "asar": true,
         "executableName": "study-drug-label-maker",
         "name": "Study Drug Label Maker",
         "icon": "src/assets/images/icon.ico",
+        "ignore": [".scss", "/coverage/"],
         "win32metadata": {
-          "CompanyName": "Northwell Health",
-          "FileDescription": "Label maker for the research pharmacy program at North Shore University Hospital."
+          "CompanyName": "Nathaniel J. Liberty",
+          "FileDescription": "Label maker for study drugs of various kinds."
         }
       },
       "electronWinstallerConfig": {
@@ -57,28 +60,33 @@
     }
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.5",
     "bootstrap": "^4.3.1",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^3.4.0",
-    "popper.js": "^1.14.7",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.8.4",
-    "react-router-dom": "^5.0.0"
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "react-hot-loader": "^4.12.14",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.2.0",
     "autoprefixer": "^9.6.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.4",
@@ -92,7 +100,6 @@
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.8.0",
     "node-sass": "^4.12.0",
-    "postcss-cli": "^6.1.2",
-    "react-test-renderer": "^16.8.6"
+    "postcss-cli": "^6.1.2"
   }
 }
