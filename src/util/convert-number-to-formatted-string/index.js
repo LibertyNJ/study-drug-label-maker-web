@@ -1,5 +1,3 @@
-'use-strict';
-
 const NUMBER_FORMAT = {
   maximumFractionDigits: 2,
   useGrouping: true,

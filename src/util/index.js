@@ -1,5 +1,3 @@
-'use-strict';
-
 export { camelCase } from './camel-case';
 export { convertNumberToFormattedString } from './convert-number-to-formatted-string';
 export { formatDateAsString } from './format-date-as-string';

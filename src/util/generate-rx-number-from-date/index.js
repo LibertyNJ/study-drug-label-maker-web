@@ -1,5 +1,3 @@
-'use-strict';
-
 export function generateRxNumberFromDate(date) {
   const day = convertToPaddedString(date.getDate());
   const hours = convertToPaddedString(date.getHours());

@@ -1,5 +1,3 @@
-'use-strict';
-
 import {
   CHANGE_FIELD,
   CHANGE_LABEL_TYPE,

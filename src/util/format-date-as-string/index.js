@@ -1,5 +1,3 @@
-'use-strict';
-
 const DATE_FORMAT = {
   day: '2-digit',
   hour: '2-digit',

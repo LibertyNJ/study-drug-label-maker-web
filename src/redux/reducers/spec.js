@@ -1,5 +1,3 @@
-'use-strict';
-
 import rootReducer, { INITIAL_STATE } from './index';
 import {
   CHANGE_FIELD,
