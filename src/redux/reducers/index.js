@@ -10,6 +10,13 @@ import { formatDateAsString, generateRxNumberFromDate } from '../../util';
 export const INITIAL_STATE = {
   alternatePrintFormatIsEnabled: false,
   dispensedDate: '',
+  facilityCity: '',
+  facilityDeaNumber: '',
+  facilityName: '',
+  facilityPhone: '',
+  facilityState: '',
+  facilityStreet: '',
+  facilityZip: '',
   labelType: '',
   medicationDiluent: '',
   medicationExpirationDate: '',

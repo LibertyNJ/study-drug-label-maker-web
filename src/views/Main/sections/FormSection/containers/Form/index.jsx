@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LabelTypeFieldset from './components/LabelTypeFieldSet';
+import FacilitySection from './sections/FacilitySection';
 import MedicationSection from './sections/MedicationSection';
 import PatientSection from './sections/PatientSection';
 import ProvidersSection from './sections/ProvidersSection';
@@ -28,6 +29,7 @@ function Form({ ...restProps }) {
   return (
     <form {...restProps}>
       <LabelTypeFieldset />
+      <FacilitySection className="mb-3" />
       <PatientSection className="mb-3" />
       <StudySection className="mb-3" />
       <MedicationSection className="mb-3" />

@@ -2,18 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import LabelHeader from '../components/LabelHeader';
 import DispenseSection from './DispenseSection';
+import LabelHeader from './LabelHeader';
 import MedicationSection from './MedicationSection';
 import PatientSection from './PatientSection';
 import ProvidersSection from './ProvidersSection';
 import StudySection from './StudySection';
 import { reduceClassNames } from '../../../../../../../util';
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(InfusionLabel);
+export default connect(mapStateToProps, mapDispatchToProps)(InfusionLabel);
 
 function mapStateToProps({ alternatePrintFormatIsEnabled }) {
   return {
@@ -32,8 +29,14 @@ InfusionLabel.propTypes = {
 
 const BASE_CLASS_NAME = 'label label--infusion';
 
-function InfusionLabel({ alternatePrintFormatIsEnabled, className, ...restProps }) {
-  const formatClassName = !alternatePrintFormatIsEnabled ? 'label--alternate-format' : '';
+function InfusionLabel({
+  alternatePrintFormatIsEnabled,
+  className,
+  ...restProps
+}) {
+  const formatClassName = !alternatePrintFormatIsEnabled
+    ? 'label--alternate-format'
+    : '';
   return (
     <article
       className={reduceClassNames(BASE_CLASS_NAME, formatClassName, className)}
